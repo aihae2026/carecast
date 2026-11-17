@@ -1,0 +1,1998 @@
+{
+  "생성": "2026-09-13T09:16:00.490Z",
+  "설명": "자동방송 다섯의 변경 전 동작. auto-broadcast-regression.test.js 가 이것과 대조한다.",
+  "시퀀서기본표": {
+    "morning_prayer": {
+      "kind": "audio",
+      "via": "AudioFile",
+      "category": "morning-prayer",
+      "conditional": false
+    },
+    "breakfast_prayer_tts": {
+      "kind": "audio",
+      "via": "MealPrayer",
+      "category": "breakfast-grace",
+      "conditional": false
+    },
+    "exercise_video": {
+      "kind": "video",
+      "via": "VideoFile",
+      "category": "exercise-video",
+      "conditional": false
+    },
+    "lunch_video": {
+      "kind": "video",
+      "via": "VideoFile",
+      "category": "lunch-video",
+      "conditional": false
+    },
+    "lunch_prayer_audio": {
+      "kind": "audio",
+      "via": "AudioFile",
+      "category": "lunch-prayer",
+      "conditional": false
+    },
+    "lunch_prayer_tts": {
+      "kind": "audio",
+      "via": "MealPrayer",
+      "category": "lunch-grace",
+      "conditional": false
+    },
+    "dinner_video": {
+      "kind": "video",
+      "via": "VideoFile",
+      "category": "dinner-video",
+      "conditional": false
+    },
+    "dinner_prayer_tts": {
+      "kind": "audio",
+      "via": "MealPrayer",
+      "category": "dinner-grace",
+      "conditional": false
+    },
+    "evening_prayer_audio": {
+      "kind": "audio",
+      "via": "AudioFile",
+      "category": "dinner-prayer",
+      "conditional": false
+    },
+    "evening_closing_audio": {
+      "kind": "audio",
+      "via": "AudioFile",
+      "category": null,
+      "conditional": true,
+      "candidates": [
+        "evening-prayer",
+        "dinner-prayer"
+      ]
+    }
+  },
+  "sites": {
+    "new": {
+      "tabs": {
+        "morning": {
+          "enabled": true,
+          "time": "07:50",
+          "steps": [
+            {
+              "id": "bgm",
+              "order": 0,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "date_weather_schedule",
+              "order": 1,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "morning_prayer_intro",
+              "order": 2,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "morning_prayer",
+              "order": 3,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "breakfast_prayer_tts",
+              "order": 4,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "bgm_after",
+              "order": 5,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "medication_tts",
+              "order": 6,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "morning_video",
+              "order": 7,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": 15,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            }
+          ],
+          "picks": {
+            "morning_prayer": {
+              "category": "morning-prayer",
+              "kind": "audio",
+              "via": "AudioFile",
+              "file": null
+            },
+            "breakfast_prayer_tts": {
+              "category": "breakfast-grace",
+              "kind": "audio",
+              "via": "MealPrayer",
+              "mode": "tts",
+              "file": null
+            }
+          },
+          "estimate": {
+            "totalMs": 1411900,
+            "end": {
+              "time": "08:14",
+              "dayOffset": 0
+            },
+            "startTime": "07:50"
+          }
+        },
+        "exercise": {
+          "enabled": true,
+          "time": "09:00",
+          "steps": [
+            {
+              "id": "bgm",
+              "order": 0,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "exercise_tts",
+              "order": 1,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "exercise_video",
+              "order": 2,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            }
+          ],
+          "picks": {
+            "exercise_video": {
+              "category": "exercise-video",
+              "kind": "video",
+              "via": "VideoFile",
+              "file": null,
+              "delayBucket": "exercise"
+            }
+          },
+          "estimate": {
+            "totalMs": 18900,
+            "end": {
+              "time": "09:01",
+              "dayOffset": 0
+            },
+            "startTime": "09:00"
+          }
+        },
+        "lunch": {
+          "enabled": true,
+          "time": "11:10",
+          "steps": [
+            {
+              "id": "bgm_start",
+              "order": 0,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "lunch_tts",
+              "order": 1,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "lunch_video",
+              "order": 2,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "lunch_prayer_intro",
+              "order": 3,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "lunch_prayer_audio",
+              "order": 4,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "lunch_prayer_tts",
+              "order": 5,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "bgm",
+              "order": 6,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "medication_tts",
+              "order": 7,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "lunch_video_after",
+              "order": 8,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": 15,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            }
+          ],
+          "picks": {
+            "lunch_video": {
+              "category": "lunch-video",
+              "kind": "video",
+              "via": "VideoFile",
+              "file": null,
+              "delayBucket": "meal"
+            },
+            "lunch_prayer_audio": {
+              "category": "lunch-prayer",
+              "kind": "audio",
+              "via": "AudioFile",
+              "file": null
+            },
+            "lunch_prayer_tts": {
+              "category": "lunch-grace",
+              "kind": "audio",
+              "via": "MealPrayer",
+              "mode": "tts",
+              "file": null
+            }
+          },
+          "estimate": {
+            "totalMs": 1368700,
+            "end": {
+              "time": "11:33",
+              "dayOffset": 0
+            },
+            "startTime": "11:10"
+          }
+        },
+        "dinner": {
+          "enabled": true,
+          "time": "16:14",
+          "steps": [
+            {
+              "id": "bgm_start",
+              "order": 0,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "dinner_tts",
+              "order": 1,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "dinner_video",
+              "order": 2,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "dinner_prayer_tts",
+              "order": 3,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "bgm",
+              "order": 4,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "medication_tts",
+              "order": 5,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "dinner_video_after",
+              "order": 6,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": 15,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            }
+          ],
+          "picks": {
+            "dinner_video": {
+              "category": "dinner-video",
+              "kind": "video",
+              "via": "VideoFile",
+              "file": null,
+              "delayBucket": "meal"
+            },
+            "dinner_prayer_tts": {
+              "category": "dinner-grace",
+              "kind": "audio",
+              "via": "MealPrayer",
+              "mode": "tts",
+              "file": null
+            }
+          },
+          "estimate": {
+            "totalMs": 1356100,
+            "end": {
+              "time": "16:37",
+              "dayOffset": 0
+            },
+            "startTime": "16:14"
+          }
+        },
+        "evening_prayer": {
+          "enabled": true,
+          "time": "18:00",
+          "steps": [
+            {
+              "id": "bgm",
+              "order": 0,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": 0,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "evening_prayer_tts",
+              "order": 1,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "evening_prayer_audio",
+              "order": 2,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "bgm_closing",
+              "order": 3,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": 0,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "evening_prayer_tts2",
+              "order": 4,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "evening_closing_audio",
+              "order": 5,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "bgm_final",
+              "order": 6,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": 10,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "evening_closing_tts",
+              "order": 7,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            }
+          ],
+          "picks": {
+            "evening_prayer_audio": {
+              "category": "dinner-prayer",
+              "kind": "audio",
+              "via": "AudioFile",
+              "file": null
+            },
+            "evening_closing_audio": {
+              "category": "dinner-prayer",
+              "kind": "audio",
+              "via": "AudioFile",
+              "file": null
+            }
+          },
+          "estimate": {
+            "totalMs": 62900,
+            "end": {
+              "time": "18:02",
+              "dayOffset": 0
+            },
+            "startTime": "18:00"
+          }
+        }
+      },
+      "rawSteps": {
+        "morning": null,
+        "exercise": null,
+        "lunch": null,
+        "dinner": null,
+        "evening_prayer": null
+      }
+    },
+    "legacy": {
+      "tabs": {
+        "morning": {
+          "enabled": true,
+          "time": "07:50",
+          "steps": [
+            {
+              "id": "bgm",
+              "order": 0,
+              "enabled": true,
+              "volume": 62,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "date_weather_schedule",
+              "order": 1,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "morning_prayer_intro",
+              "order": 2,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "morning_prayer",
+              "order": 3,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "breakfast_prayer_tts",
+              "order": 4,
+              "enabled": false,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "bgm_after",
+              "order": 5,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "morning_video",
+              "order": 6,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": 15,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "medication_tts",
+              "order": 7,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            }
+          ],
+          "picks": {
+            "morning_prayer": {
+              "category": "morning-prayer",
+              "kind": "audio",
+              "via": "AudioFile",
+              "file": {
+                "id": 4,
+                "filename": "mp_new.mp3",
+                "name": "아침 음원 (새로 녹음).mp3",
+                "duration": 155
+              }
+            },
+            "breakfast_prayer_tts": {
+              "category": "breakfast-grace",
+              "kind": "audio",
+              "via": "MealPrayer",
+              "mode": "audio",
+              "file": {
+                "id": 7,
+                "filename": "bg.mp3",
+                "name": "아침 식사 전 음원.mp3",
+                "duration": 41
+              }
+            }
+          },
+          "estimate": {
+            "totalMs": 1134300,
+            "end": {
+              "time": "08:09",
+              "dayOffset": 0
+            },
+            "startTime": "07:50"
+          }
+        },
+        "exercise": {
+          "enabled": true,
+          "time": "09:00",
+          "steps": [
+            {
+              "id": "bgm",
+              "order": 0,
+              "enabled": true,
+              "volume": 62,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "exercise_video",
+              "order": 1,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "exercise_tts",
+              "order": 2,
+              "enabled": false,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            }
+          ],
+          "picks": {
+            "exercise_video": {
+              "category": "exercise-video",
+              "kind": "video",
+              "via": "VideoFile",
+              "file": {
+                "id": 10,
+                "filename": "ex.mp4",
+                "name": "국민체조.mp4",
+                "duration": 372
+              },
+              "delayBucket": "exercise"
+            }
+          },
+          "estimate": {
+            "totalMs": 379600,
+            "end": {
+              "time": "09:07",
+              "dayOffset": 0
+            },
+            "startTime": "09:00"
+          }
+        },
+        "lunch": {
+          "enabled": true,
+          "time": "11:10",
+          "steps": [
+            {
+              "id": "bgm_start",
+              "order": 0,
+              "enabled": true,
+              "volume": 62,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "lunch_tts",
+              "order": 1,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "lunch_video",
+              "order": 2,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "lunch_prayer_intro",
+              "order": 3,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "lunch_prayer_audio",
+              "order": 4,
+              "enabled": false,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "lunch_prayer_tts",
+              "order": 5,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "bgm",
+              "order": 6,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "lunch_video_after",
+              "order": 7,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": 15,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "medication_tts",
+              "order": 8,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            }
+          ],
+          "picks": {
+            "lunch_video": {
+              "category": "lunch-video",
+              "kind": "video",
+              "via": "VideoFile",
+              "file": {
+                "id": 11,
+                "filename": "lv.mp4",
+                "name": "식사전 체조 (점심).mp4",
+                "duration": 301
+              },
+              "delayBucket": "meal"
+            },
+            "lunch_prayer_audio": {
+              "category": "lunch-prayer",
+              "kind": "audio",
+              "via": "AudioFile",
+              "file": {
+                "id": 5,
+                "filename": "lp.mp3",
+                "name": "점심 음원.mp3",
+                "duration": 96
+              }
+            },
+            "lunch_prayer_tts": {
+              "category": "lunch-grace",
+              "kind": "audio",
+              "via": "MealPrayer",
+              "mode": "audio",
+              "file": {
+                "id": 8,
+                "filename": "lg.mp3",
+                "name": "점심 식사 전 음원.mp3",
+                "duration": 38
+              }
+            }
+          },
+          "estimate": {
+            "totalMs": 1279600,
+            "end": {
+              "time": "11:32",
+              "dayOffset": 0
+            },
+            "startTime": "11:10"
+          }
+        },
+        "dinner": {
+          "enabled": true,
+          "time": "16:14",
+          "steps": [
+            {
+              "id": "bgm_start",
+              "order": 0,
+              "enabled": true,
+              "volume": 62,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "dinner_tts",
+              "order": 1,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "dinner_video",
+              "order": 2,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "dinner_prayer_tts",
+              "order": 3,
+              "enabled": false,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "bgm",
+              "order": 4,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "dinner_video_after",
+              "order": 5,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": 15,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "medication_tts",
+              "order": 6,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            }
+          ],
+          "picks": {
+            "dinner_video": {
+              "category": "dinner-video",
+              "kind": "video",
+              "via": "VideoFile",
+              "file": {
+                "id": 12,
+                "filename": "dv.mp4",
+                "name": "식사전 체조 (저녁).mp4",
+                "duration": 298
+              },
+              "delayBucket": "meal"
+            },
+            "dinner_prayer_tts": {
+              "category": "dinner-grace",
+              "kind": "audio",
+              "via": "MealPrayer",
+              "mode": "tts",
+              "file": null
+            }
+          },
+          "estimate": {
+            "totalMs": 1224000,
+            "end": {
+              "time": "16:35",
+              "dayOffset": 0
+            },
+            "startTime": "16:14"
+          }
+        },
+        "evening_prayer": {
+          "enabled": true,
+          "time": "18:00",
+          "steps": [
+            {
+              "id": "bgm",
+              "order": 0,
+              "enabled": true,
+              "volume": 62,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": 0,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "evening_prayer_tts",
+              "order": 1,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "evening_prayer_audio",
+              "order": 2,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "bgm_closing",
+              "order": 3,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": 0,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "evening_prayer_tts2",
+              "order": 4,
+              "enabled": false,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "evening_closing_audio",
+              "order": 5,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "evening_closing_tts",
+              "order": 6,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "bgm_final",
+              "order": 7,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": 10,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            }
+          ],
+          "picks": {
+            "evening_prayer_audio": {
+              "category": "dinner-prayer",
+              "kind": "audio",
+              "via": "AudioFile",
+              "file": {
+                "id": 6,
+                "filename": "dp.mp3",
+                "name": "저녁 첫 음원.mp3",
+                "duration": 104
+              }
+            },
+            "evening_closing_audio": {
+              "category": "dinner-prayer",
+              "kind": "audio",
+              "via": "AudioFile",
+              "file": {
+                "id": 6,
+                "filename": "dp.mp3",
+                "name": "저녁 첫 음원.mp3",
+                "duration": 104
+              }
+            }
+          },
+          "estimate": {
+            "totalMs": 262100,
+            "end": {
+              "time": "18:05",
+              "dayOffset": 0
+            },
+            "startTime": "18:00"
+          }
+        }
+      },
+      "rawSteps": {
+        "morning": "[{\"id\":\"bgm\",\"label\":\"BGM 시작\",\"enabled\":true,\"order\":0,\"bgmSource\":\"yt_preset\",\"bgmKeyword\":\"상쾌한 경쾌한 클래식 아침 음악\",\"volume\":62},{\"id\":\"date_weather_schedule\",\"label\":\"날짜/요일/날씨/일정 안내\",\"enabled\":true,\"order\":1},{\"id\":\"morning_prayer_intro\",\"label\":\"아침 녹음 안내 (TTS)\",\"enabled\":true,\"order\":2},{\"id\":\"morning_prayer\",\"label\":\"아침 녹음 음원\",\"enabled\":true,\"order\":3},{\"id\":\"breakfast_prayer_tts\",\"label\":\"아침 식사 전 안내 (TTS)\",\"enabled\":false,\"order\":4},{\"id\":\"bgm_after\",\"label\":\"BGM 재시작 (녹음 후)\",\"enabled\":true,\"order\":5,\"bgmSource\":\"yt_preset\",\"bgmKeyword\":\"상쾌한 경쾌한 클래식 아침 음악\"},{\"id\":\"medication_tts\",\"label\":\"투약 안내 (TTS)\",\"enabled\":true,\"order\":7,\"delay_min\":6,\"end_date\":null,\"content\":\"선생님들께 안내드립니다. 식사 후 투약 시 반드시 어르신의 성함과 얼굴을 확인하고, 성함을 직접 호명한 후 투약해 주시기 바랍니다. 투약 사고 예방을 위해 한 분 한 분 정확하게 확인해 주시기 바랍니다.\",\"ttsVoice\":\"female\"},{\"id\":\"morning_video\",\"label\":\"아침 후 YouTube 영상\",\"enabled\":true,\"order\":6,\"videoId\":\"\",\"videoSearch\":\"seasonal\",\"durationMin\":15}]",
+        "exercise": "[{\"id\":\"bgm\",\"label\":\"BGM 시작\",\"enabled\":true,\"order\":0,\"bgmSource\":\"yt_preset\",\"bgmKeyword\":\"클래식 음악\",\"volume\":62},{\"id\":\"exercise_tts\",\"label\":\"국민체조 안내 (TTS)\",\"enabled\":false,\"order\":2},{\"id\":\"exercise_video\",\"label\":\"국민체조 영상\",\"enabled\":true,\"order\":1}]",
+        "lunch": "[{\"id\":\"bgm_start\",\"label\":\"BGM 시작 (체조 준비)\",\"enabled\":true,\"order\":0,\"bgmSource\":\"yt_preset\",\"bgmKeyword\":\"클래식 음악\",\"volume\":62},{\"id\":\"lunch_tts\",\"label\":\"점심 체조 안내 (TTS)\",\"enabled\":true,\"order\":1,\"ttsVoice\":\"female\"},{\"id\":\"lunch_video\",\"label\":\"식사전 체조 영상\",\"enabled\":true,\"order\":2},{\"id\":\"lunch_prayer_intro\",\"label\":\"점심 녹음 안내 (TTS)\",\"enabled\":true,\"order\":3,\"ttsVoice\":\"female\"},{\"id\":\"lunch_prayer_audio\",\"label\":\"낮 녹음 음원\",\"enabled\":false,\"order\":4},{\"id\":\"lunch_prayer_tts\",\"label\":\"점심 식사 전 안내 (TTS)\",\"enabled\":true,\"order\":5,\"ttsVoice\":\"female\"},{\"id\":\"bgm\",\"label\":\"BGM 시작 (식사 중)\",\"enabled\":true,\"order\":6,\"bgmSource\":\"yt_preset\",\"bgmKeyword\":\"클래식 음악\"},{\"id\":\"medication_tts\",\"label\":\"투약 안내 (TTS)\",\"enabled\":true,\"order\":8,\"delay_min\":6,\"end_date\":null,\"content\":\"선생님들께 안내드립니다. 식사 후 투약 시 반드시 어르신의 성함과 얼굴을 확인하고, 성함을 직접 호명한 후 투약해 주시기 바랍니다. 투약 사고 예방을 위해 한 분 한 분 정확하게 확인해 주시기 바랍니다.\",\"ttsVoice\":\"female\"},{\"id\":\"lunch_video_after\",\"label\":\"식사 중 YouTube 영상\",\"enabled\":true,\"order\":7,\"videoId\":\"\",\"videoSearch\":\"seasonal\",\"durationMin\":15}]",
+        "dinner": "[{\"id\":\"bgm_start\",\"label\":\"BGM 시작 (체조 준비)\",\"enabled\":true,\"order\":0,\"bgmSource\":\"yt_preset\",\"bgmKeyword\":\"클래식 음악\",\"volume\":62},{\"id\":\"dinner_tts\",\"label\":\"저녁 체조 안내 (TTS)\",\"enabled\":true,\"order\":1,\"ttsVoice\":\"male\"},{\"id\":\"dinner_video\",\"label\":\"식사전 체조 영상\",\"enabled\":true,\"order\":2},{\"id\":\"dinner_prayer_tts\",\"label\":\"저녁 식사 전 안내 (TTS)\",\"enabled\":false,\"order\":3,\"ttsVoice\":\"male\"},{\"id\":\"bgm\",\"label\":\"BGM 시작 (식사 중)\",\"enabled\":true,\"order\":4,\"bgmSource\":\"yt_preset\",\"bgmKeyword\":\"클래식 음악\"},{\"id\":\"medication_tts\",\"label\":\"투약 안내 (TTS)\",\"enabled\":true,\"order\":6,\"delay_min\":6,\"end_date\":null,\"content\":\"선생님들께 안내드립니다. 식사 후 투약 시 반드시 어르신의 성함과 얼굴을 확인하고, 성함을 직접 호명한 후 투약해 주시기 바랍니다. 투약 사고 예방을 위해 한 분 한 분 정확하게 확인해 주시기 바랍니다.\",\"ttsVoice\":\"female\"},{\"id\":\"dinner_video_after\",\"label\":\"식사 중 YouTube 영상\",\"enabled\":true,\"order\":5,\"videoId\":\"\",\"videoSearch\":\"seasonal\",\"durationMin\":15}]",
+        "evening_prayer": "[{\"id\":\"bgm\",\"label\":\"BGM 시작\",\"enabled\":true,\"order\":0,\"bgmSource\":\"yt_preset\",\"bgmKeyword\":\"클래식 음악\",\"durationSec\":0,\"volume\":62},{\"id\":\"evening_prayer_tts\",\"label\":\"저녁 첫 녹음 안내 (TTS)\",\"enabled\":true,\"order\":1,\"ttsVoice\":\"male\"},{\"id\":\"evening_prayer_audio\",\"label\":\"저녁 첫 녹음 음원\",\"enabled\":true,\"order\":2},{\"id\":\"bgm_closing\",\"label\":\"BGM 재시작 (녹음 사이)\",\"enabled\":true,\"order\":3,\"bgmSource\":\"yt_preset\",\"bgmKeyword\":\"클래식 음악\",\"durationSec\":0},{\"id\":\"evening_prayer_tts2\",\"label\":\"저녁 마무리 안내 (TTS)\",\"enabled\":false,\"order\":4,\"ttsVoice\":\"male\"},{\"id\":\"evening_closing_audio\",\"label\":\"저녁 마무리 음원\",\"enabled\":true,\"order\":5},{\"id\":\"bgm_final\",\"label\":\"BGM 재시작 (문안인사 전)\",\"enabled\":true,\"order\":7,\"bgmSource\":\"yt_preset\",\"bgmKeyword\":\"클래식 음악\",\"durationSec\":10},{\"id\":\"evening_closing_tts\",\"label\":\"저녁 문안인사 (TTS)\",\"enabled\":true,\"order\":6,\"ttsVoice\":\"male\"}]"
+      }
+    },
+    "mixed": {
+      "tabs": {
+        "morning": {
+          "enabled": true,
+          "time": "07:50",
+          "steps": [
+            {
+              "id": "bgm",
+              "order": 0,
+              "enabled": true,
+              "volume": 62,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "date_weather_schedule",
+              "order": 1,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "morning_prayer_intro",
+              "order": 2,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "morning_prayer",
+              "order": 3,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "breakfast_prayer_tts",
+              "order": 4,
+              "enabled": false,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "bgm_after",
+              "order": 5,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "morning_video",
+              "order": 6,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": 15,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "medication_tts",
+              "order": 7,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            }
+          ],
+          "picks": {
+            "morning_prayer": {
+              "category": "morning-prayer",
+              "kind": "audio",
+              "via": "AudioFile",
+              "file": {
+                "id": 16,
+                "filename": "mp_new.mp3",
+                "name": "아침 음원 (새로 녹음).mp3",
+                "duration": 155
+              }
+            },
+            "breakfast_prayer_tts": {
+              "category": "breakfast-grace",
+              "kind": "audio",
+              "via": "MealPrayer",
+              "mode": "audio",
+              "file": {
+                "id": 19,
+                "filename": "bg.mp3",
+                "name": "아침 식사 전 음원.mp3",
+                "duration": 41
+              }
+            }
+          },
+          "estimate": {
+            "totalMs": 1134300,
+            "end": {
+              "time": "08:09",
+              "dayOffset": 0
+            },
+            "startTime": "07:50"
+          }
+        },
+        "exercise": {
+          "enabled": true,
+          "time": "09:00",
+          "steps": [
+            {
+              "id": "bgm",
+              "order": 0,
+              "enabled": true,
+              "volume": 62,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "exercise_video",
+              "order": 1,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "exercise_tts",
+              "order": 2,
+              "enabled": false,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            }
+          ],
+          "picks": {
+            "exercise_video": {
+              "category": "exercise-video",
+              "kind": "video",
+              "via": "VideoFile",
+              "file": {
+                "id": 22,
+                "filename": "ex.mp4",
+                "name": "국민체조.mp4",
+                "duration": 372
+              },
+              "delayBucket": "exercise"
+            }
+          },
+          "estimate": {
+            "totalMs": 379600,
+            "end": {
+              "time": "09:07",
+              "dayOffset": 0
+            },
+            "startTime": "09:00"
+          }
+        },
+        "lunch": {
+          "enabled": true,
+          "time": "11:10",
+          "steps": [
+            {
+              "id": "bgm_start",
+              "order": 0,
+              "enabled": true,
+              "volume": 62,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "lunch_tts",
+              "order": 1,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "lunch_video",
+              "order": 2,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "lunch_prayer_intro",
+              "order": 3,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "lunch_prayer_audio",
+              "order": 4,
+              "enabled": false,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "lunch_prayer_tts",
+              "order": 5,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "bgm",
+              "order": 6,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "lunch_video_after",
+              "order": 7,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": 15,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "medication_tts",
+              "order": 8,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            }
+          ],
+          "picks": {
+            "lunch_video": {
+              "category": "lunch-video",
+              "kind": "video",
+              "via": "VideoFile",
+              "file": {
+                "id": 23,
+                "filename": "lv.mp4",
+                "name": "식사전 체조 (점심).mp4",
+                "duration": 301
+              },
+              "delayBucket": "meal"
+            },
+            "lunch_prayer_audio": {
+              "category": "lunch-prayer",
+              "kind": "audio",
+              "via": "AudioFile",
+              "file": {
+                "id": 17,
+                "filename": "lp.mp3",
+                "name": "점심 음원.mp3",
+                "duration": 96
+              }
+            },
+            "lunch_prayer_tts": {
+              "category": "lunch-grace",
+              "kind": "audio",
+              "via": "MealPrayer",
+              "mode": "audio",
+              "file": {
+                "id": 20,
+                "filename": "lg.mp3",
+                "name": "점심 식사 전 음원.mp3",
+                "duration": 38
+              }
+            }
+          },
+          "estimate": {
+            "totalMs": 1279600,
+            "end": {
+              "time": "11:32",
+              "dayOffset": 0
+            },
+            "startTime": "11:10"
+          }
+        },
+        "dinner": {
+          "enabled": true,
+          "time": "16:14",
+          "steps": [
+            {
+              "id": "bgm_start",
+              "order": 0,
+              "enabled": true,
+              "volume": 62,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "dinner_tts",
+              "order": 1,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "dinner_video",
+              "order": 2,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "dinner_prayer_tts",
+              "order": 3,
+              "enabled": false,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "bgm",
+              "order": 4,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "dinner_video_after",
+              "order": 5,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": 15,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "medication_tts",
+              "order": 6,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            }
+          ],
+          "picks": {
+            "dinner_video": {
+              "category": "dinner-video",
+              "kind": "video",
+              "via": "VideoFile",
+              "file": {
+                "id": 24,
+                "filename": "dv.mp4",
+                "name": "식사전 체조 (저녁).mp4",
+                "duration": 298
+              },
+              "delayBucket": "meal"
+            },
+            "dinner_prayer_tts": {
+              "category": "dinner-grace",
+              "kind": "audio",
+              "via": "MealPrayer",
+              "mode": "tts",
+              "file": null
+            }
+          },
+          "estimate": {
+            "totalMs": 1224000,
+            "end": {
+              "time": "16:35",
+              "dayOffset": 0
+            },
+            "startTime": "16:14"
+          }
+        },
+        "evening_prayer": {
+          "enabled": true,
+          "time": "18:00",
+          "steps": [
+            {
+              "id": "bgm",
+              "order": 0,
+              "enabled": true,
+              "volume": 62,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": 0,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "evening_prayer_tts",
+              "order": 1,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "evening_prayer_audio",
+              "order": 2,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "bgm_closing",
+              "order": 3,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": 0,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "evening_prayer_tts2",
+              "order": 4,
+              "enabled": false,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "evening_closing_audio",
+              "order": 5,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "evening_closing_tts",
+              "order": 6,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": null,
+              "bgmSource": null,
+              "customType": null,
+              "hasSourceKey": false
+            },
+            {
+              "id": "bgm_final",
+              "order": 7,
+              "enabled": true,
+              "volume": null,
+              "bgmVolume": null,
+              "rate": null,
+              "durationMin": null,
+              "durationSec": 10,
+              "bgmSource": "yt_preset",
+              "customType": null,
+              "hasSourceKey": false
+            }
+          ],
+          "picks": {
+            "evening_prayer_audio": {
+              "category": "dinner-prayer",
+              "kind": "audio",
+              "via": "AudioFile",
+              "file": {
+                "id": 18,
+                "filename": "dp.mp3",
+                "name": "저녁 첫 음원.mp3",
+                "duration": 104
+              }
+            },
+            "evening_closing_audio": {
+              "category": "dinner-prayer",
+              "kind": "audio",
+              "via": "AudioFile",
+              "file": {
+                "id": 18,
+                "filename": "dp.mp3",
+                "name": "저녁 첫 음원.mp3",
+                "duration": 104
+              }
+            }
+          },
+          "estimate": {
+            "totalMs": 262100,
+            "end": {
+              "time": "18:05",
+              "dayOffset": 0
+            },
+            "startTime": "18:00"
+          }
+        }
+      },
+      "rawSteps": {
+        "morning": "[{\"id\":\"bgm\",\"label\":\"BGM 시작\",\"enabled\":true,\"order\":0,\"bgmSource\":\"yt_preset\",\"bgmKeyword\":\"상쾌한 경쾌한 클래식 아침 음악\",\"volume\":62},{\"id\":\"date_weather_schedule\",\"label\":\"날짜/요일/날씨/일정 안내\",\"enabled\":true,\"order\":1},{\"id\":\"morning_prayer_intro\",\"label\":\"아침 녹음 안내 (TTS)\",\"enabled\":true,\"order\":2},{\"id\":\"morning_prayer\",\"label\":\"아침 녹음 음원\",\"enabled\":true,\"order\":3},{\"id\":\"breakfast_prayer_tts\",\"label\":\"아침 식사 전 안내 (TTS)\",\"enabled\":false,\"order\":4},{\"id\":\"bgm_after\",\"label\":\"BGM 재시작 (녹음 후)\",\"enabled\":true,\"order\":5,\"bgmSource\":\"yt_preset\",\"bgmKeyword\":\"상쾌한 경쾌한 클래식 아침 음악\"},{\"id\":\"medication_tts\",\"label\":\"투약 안내 (TTS)\",\"enabled\":true,\"order\":7,\"delay_min\":6,\"end_date\":null,\"content\":\"선생님들께 안내드립니다. 식사 후 투약 시 반드시 어르신의 성함과 얼굴을 확인하고, 성함을 직접 호명한 후 투약해 주시기 바랍니다. 투약 사고 예방을 위해 한 분 한 분 정확하게 확인해 주시기 바랍니다.\",\"ttsVoice\":\"female\"},{\"id\":\"morning_video\",\"label\":\"아침 후 YouTube 영상\",\"enabled\":true,\"order\":6,\"videoId\":\"\",\"videoSearch\":\"seasonal\",\"durationMin\":15}]",
+        "exercise": "[{\"id\":\"bgm\",\"label\":\"BGM 시작\",\"enabled\":true,\"order\":0,\"bgmSource\":\"yt_preset\",\"bgmKeyword\":\"클래식 음악\",\"volume\":62},{\"id\":\"exercise_tts\",\"label\":\"국민체조 안내 (TTS)\",\"enabled\":false,\"order\":2},{\"id\":\"exercise_video\",\"label\":\"국민체조 영상\",\"enabled\":true,\"order\":1}]",
+        "lunch": "[{\"id\":\"bgm_start\",\"label\":\"BGM 시작 (체조 준비)\",\"enabled\":true,\"order\":0,\"bgmSource\":\"yt_preset\",\"bgmKeyword\":\"클래식 음악\",\"volume\":62},{\"id\":\"lunch_tts\",\"label\":\"점심 체조 안내 (TTS)\",\"enabled\":true,\"order\":1,\"ttsVoice\":\"female\"},{\"id\":\"lunch_video\",\"label\":\"식사전 체조 영상\",\"enabled\":true,\"order\":2},{\"id\":\"lunch_prayer_intro\",\"label\":\"점심 녹음 안내 (TTS)\",\"enabled\":true,\"order\":3,\"ttsVoice\":\"female\"},{\"id\":\"lunch_prayer_audio\",\"label\":\"낮 녹음 음원\",\"enabled\":false,\"order\":4},{\"id\":\"lunch_prayer_tts\",\"label\":\"점심 식사 전 안내 (TTS)\",\"enabled\":true,\"order\":5,\"ttsVoice\":\"female\"},{\"id\":\"bgm\",\"label\":\"BGM 시작 (식사 중)\",\"enabled\":true,\"order\":6,\"bgmSource\":\"yt_preset\",\"bgmKeyword\":\"클래식 음악\"},{\"id\":\"medication_tts\",\"label\":\"투약 안내 (TTS)\",\"enabled\":true,\"order\":8,\"delay_min\":6,\"end_date\":null,\"content\":\"선생님들께 안내드립니다. 식사 후 투약 시 반드시 어르신의 성함과 얼굴을 확인하고, 성함을 직접 호명한 후 투약해 주시기 바랍니다. 투약 사고 예방을 위해 한 분 한 분 정확하게 확인해 주시기 바랍니다.\",\"ttsVoice\":\"female\"},{\"id\":\"lunch_video_after\",\"label\":\"식사 중 YouTube 영상\",\"enabled\":true,\"order\":7,\"videoId\":\"\",\"videoSearch\":\"seasonal\",\"durationMin\":15}]",
+        "dinner": "[{\"id\":\"bgm_start\",\"label\":\"BGM 시작 (체조 준비)\",\"enabled\":true,\"order\":0,\"bgmSource\":\"yt_preset\",\"bgmKeyword\":\"클래식 음악\",\"volume\":62},{\"id\":\"dinner_tts\",\"label\":\"저녁 체조 안내 (TTS)\",\"enabled\":true,\"order\":1,\"ttsVoice\":\"male\"},{\"id\":\"dinner_video\",\"label\":\"식사전 체조 영상\",\"enabled\":true,\"order\":2},{\"id\":\"dinner_prayer_tts\",\"label\":\"저녁 식사 전 안내 (TTS)\",\"enabled\":false,\"order\":3,\"ttsVoice\":\"male\"},{\"id\":\"bgm\",\"label\":\"BGM 시작 (식사 중)\",\"enabled\":true,\"order\":4,\"bgmSource\":\"yt_preset\",\"bgmKeyword\":\"클래식 음악\"},{\"id\":\"medication_tts\",\"label\":\"투약 안내 (TTS)\",\"enabled\":true,\"order\":6,\"delay_min\":6,\"end_date\":null,\"content\":\"선생님들께 안내드립니다. 식사 후 투약 시 반드시 어르신의 성함과 얼굴을 확인하고, 성함을 직접 호명한 후 투약해 주시기 바랍니다. 투약 사고 예방을 위해 한 분 한 분 정확하게 확인해 주시기 바랍니다.\",\"ttsVoice\":\"female\"},{\"id\":\"dinner_video_after\",\"label\":\"식사 중 YouTube 영상\",\"enabled\":true,\"order\":5,\"videoId\":\"\",\"videoSearch\":\"seasonal\",\"durationMin\":15}]",
+        "evening_prayer": "[{\"id\":\"bgm\",\"label\":\"BGM 시작\",\"enabled\":true,\"order\":0,\"bgmSource\":\"yt_preset\",\"bgmKeyword\":\"클래식 음악\",\"durationSec\":0,\"volume\":62},{\"id\":\"evening_prayer_tts\",\"label\":\"저녁 첫 녹음 안내 (TTS)\",\"enabled\":true,\"order\":1,\"ttsVoice\":\"male\"},{\"id\":\"evening_prayer_audio\",\"label\":\"저녁 첫 녹음 음원\",\"enabled\":true,\"order\":2},{\"id\":\"bgm_closing\",\"label\":\"BGM 재시작 (녹음 사이)\",\"enabled\":true,\"order\":3,\"bgmSource\":\"yt_preset\",\"bgmKeyword\":\"클래식 음악\",\"durationSec\":0},{\"id\":\"evening_prayer_tts2\",\"label\":\"저녁 마무리 안내 (TTS)\",\"enabled\":false,\"order\":4,\"ttsVoice\":\"male\"},{\"id\":\"evening_closing_audio\",\"label\":\"저녁 마무리 음원\",\"enabled\":true,\"order\":5},{\"id\":\"bgm_final\",\"label\":\"BGM 재시작 (문안인사 전)\",\"enabled\":true,\"order\":7,\"bgmSource\":\"yt_preset\",\"bgmKeyword\":\"클래식 음악\",\"durationSec\":10},{\"id\":\"evening_closing_tts\",\"label\":\"저녁 문안인사 (TTS)\",\"enabled\":true,\"order\":6,\"ttsVoice\":\"male\"}]"
+      }
+    }
+  }
+}

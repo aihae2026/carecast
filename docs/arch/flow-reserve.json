@@ -1,0 +1,241 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "1. 예약하기 — 문장 한 줄이 예약이 되기까지",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "gate",
+        "label": "검토 게이트",
+        "focus": [
+          "gem",
+          "draft",
+          "card",
+          "confirm"
+        ],
+        "note": "AI는 초안까지만 만든다. 사람이 확인 카드에서 체크하고 확정을 눌러야 예약이 된다 — 스케줄러는 초안 표를 아예 읽지 않는다."
+      },
+      {
+        "id": "ask",
+        "label": "되묻는 자리",
+        "focus": [
+          "card",
+          "confirm"
+        ],
+        "note": "오전/오후 · 반복 미지정 · 유형 추측 · 파일 미선택은 문장으로 띄우고, 확인 체크 전에는 확정 버튼이 잠긴다."
+      }
+    ]
+  },
+  "lanes": [
+    {
+      "id": "person",
+      "label": "사람"
+    },
+    {
+      "id": "ui",
+      "label": "화면"
+    },
+    {
+      "id": "srv",
+      "label": "서버 · 저장"
+    }
+  ],
+  "phases": [
+    {
+      "id": "read",
+      "label": "읽는다",
+      "fromCol": 0,
+      "toCol": 2
+    },
+    {
+      "id": "ask",
+      "label": "되묻는다",
+      "fromCol": 3,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "save",
+      "label": "저장한다",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "groups": [
+    {
+      "id": "gate",
+      "label": "검토 게이트 — 여기를 지나야 방송이 된다",
+      "lane": "ui",
+      "fromCol": 3,
+      "toCol": 3,
+      "variant": "emphasis"
+    }
+  ],
+  "mainPath": [
+    "say",
+    "input",
+    "gem",
+    "draft",
+    "card",
+    "confirm",
+    "insert",
+    "saved"
+  ],
+  "nodes": [
+    {
+      "id": "say",
+      "lane": "person",
+      "col": 0,
+      "type": "external",
+      "label": "문장으로 말한다",
+      "sublabel": "\"내일 오후 2시 프로그램 안내\"",
+      "width": 150
+    },
+    {
+      "id": "confirm",
+      "lane": "person",
+      "col": 4,
+      "type": "external",
+      "label": "예약 확정을 누른다",
+      "sublabel": "확인 체크 전엔 잠겨 있다",
+      "width": 150
+    },
+    {
+      "id": "input",
+      "lane": "ui",
+      "col": 1,
+      "type": "frontend",
+      "label": "빠른 예약 입력",
+      "sublabel": "QuickSchedulePhrase.jsx",
+      "width": 150
+    },
+    {
+      "id": "card",
+      "lane": "ui",
+      "col": 3,
+      "type": "frontend",
+      "label": "확인 카드",
+      "sublabel": "애매한 것만 되묻는다",
+      "width": 150
+    },
+    {
+      "id": "today",
+      "lane": "ui",
+      "col": 5,
+      "type": "frontend",
+      "label": "오늘 방송 일정에 뜬다",
+      "sublabel": "TodaySchedule.jsx",
+      "width": 150
+    },
+    {
+      "id": "gem",
+      "lane": "srv",
+      "col": 1,
+      "type": "external",
+      "label": "문장을 읽는다",
+      "sublabel": "규칙 파서 · Gemini 두 경로",
+      "tag": "초안만 만든다",
+      "width": 150
+    },
+    {
+      "id": "draft",
+      "lane": "srv",
+      "col": 2,
+      "type": "database",
+      "label": "초안 schedule_drafts",
+      "sublabel": "승인 전 상태",
+      "tag": "스케줄러는 안 본다",
+      "width": 150
+    },
+    {
+      "id": "insert",
+      "lane": "srv",
+      "col": 4,
+      "type": "backend",
+      "label": "insertSchedule()",
+      "sublabel": "routes/schedules.js",
+      "width": 150
+    },
+    {
+      "id": "saved",
+      "lane": "srv",
+      "col": 5,
+      "type": "database",
+      "label": "schedules 한 줄",
+      "sublabel": "이제부터 스케줄러가 본다",
+      "width": 150
+    }
+  ],
+  "edges": [
+    {
+      "id": "say-input",
+      "from": "say",
+      "to": "input",
+      "role": "main"
+    },
+    {
+      "id": "input-gem",
+      "from": "input",
+      "to": "gem",
+      "role": "main"
+    },
+    {
+      "id": "gem-draft",
+      "from": "gem",
+      "to": "draft",
+      "role": "main"
+    },
+    {
+      "id": "draft-card",
+      "from": "draft",
+      "to": "card",
+      "role": "main"
+    },
+    {
+      "id": "card-confirm",
+      "from": "card",
+      "to": "confirm",
+      "role": "main"
+    },
+    {
+      "id": "confirm-insert",
+      "from": "confirm",
+      "to": "insert",
+      "role": "main"
+    },
+    {
+      "id": "insert-saved",
+      "from": "insert",
+      "to": "saved",
+      "role": "main"
+    },
+    {
+      "id": "saved-today",
+      "from": "saved",
+      "to": "today",
+      "role": "async",
+      "label": "화면 갱신"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "AI가 만든 것은 바로 방송되지 않는다",
+      "items": [
+        "초안(schedule_drafts)과 예약(schedules)은 다른 표다",
+        "스케줄러는 초안 표를 읽지 않는다 — 승인 전엔 나갈 방법이 없다",
+        "확인 카드의 체크를 해야 확정 버튼이 눌린다"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "같은 문장을 두 파서가 읽는다",
+      "items": [
+        "규칙 파서(schedulePhrase.js)는 모달을 채워 열고, AI 경로는 초안을 만든다",
+        "어느 쪽이든 사람이 확정을 눌러야 예약이 된다",
+        "방송 유형 사전(domain/ontology.js) 한 벌을 둘이 같이 본다"
+      ]
+    }
+  ]
+}

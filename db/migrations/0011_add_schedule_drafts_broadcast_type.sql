@@ -1,0 +1,15 @@
+-- schedule_drafts.broadcast_type — 자연어 예약 초안이 "무엇을 방송하는가"를 담는 컬럼.
+--
+-- 그동안 자연어로 만든 예약은 두 경로(규칙 파서 schedulePhrase.js, AI 파서 scheduleDrafts.js)
+-- 모두 broadcast_type을 'text'로 고정해서 만들었다. scheduler.js(fireSchedule)는
+-- chime/audio/video/youtube-tv/bgm/flow/text 일곱 가지를 실행할 줄 아는데 자연어에서는
+-- 그 중 한 가지에만 닿을 수 있었던 셈이라, "저녁 6시에 차임벨 울려줘"라고 하면 차임벨이
+-- 울리는 대신 TTS가 그 문장을 그대로 읽었다.
+--
+-- server/domain/ontology.js가 문장에서 유형을 읽어 이 컬럼에 담고, 승인(approveDraft) 시
+-- insertSchedule에 그대로 넘긴다. 단 AI 경로는 승인 화면에 음원·영상 파일 선택기가 없으므로
+-- 파일 없이 실행 가능한 유형(text/chime/bgm, ontology.SELF_CONTAINED_TYPES)만 저장한다 —
+-- 파일 없는 audio/video 예약은 그 시각에 조용히 아무 소리도 안 나서 더 나쁘다.
+--
+-- 이 컬럼이 없던 시절의 초안은 전부 TTS 방송이었으므로 기본값도 'text'다.
+ALTER TABLE schedule_drafts ADD COLUMN broadcast_type TEXT DEFAULT 'text';

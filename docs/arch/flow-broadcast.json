@@ -1,0 +1,279 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "2. 방송하기 — 그 시각에 무슨 일이 일어나는가",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "path",
+        "label": "나가는 길",
+        "focus": [
+          "tick",
+          "due",
+          "type",
+          "seq",
+          "sse",
+          "out"
+        ],
+        "note": "매분 한 번 DB를 보고, 지금 분과 정확히 일치하는 예약만 발사한다. 그 1분을 놓치면 그날은 없다(유예창 없음)."
+      },
+      {
+        "id": "sound",
+        "label": "소리가 갈리는 곳",
+        "focus": [
+          "seq",
+          "tts",
+          "sse",
+          "out"
+        ],
+        "note": "안내 음성·차임벨은 서버 PC 스피커, 음원·BGM·영상은 브라우저다. 한쪽이 막혀도 화면상 방송은 성공으로 보인다."
+      },
+      {
+        "id": "proof",
+        "label": "나갔다는 증거",
+        "focus": [
+          "rec",
+          "watch"
+        ],
+        "note": "발동 자체가 없으면 이력에 행조차 안 생긴다 — '없었던 것'과 구별되지 않는다. 그래서 예정 +5분에 따로 본다."
+      }
+    ]
+  },
+  "lanes": [
+    {
+      "id": "sched",
+      "label": "스케줄러"
+    },
+    {
+      "id": "run",
+      "label": "실행"
+    },
+    {
+      "id": "sound",
+      "label": "소리"
+    },
+    {
+      "id": "log",
+      "label": "기록 · 감시",
+      "variant": "exception"
+    }
+  ],
+  "phases": [
+    {
+      "id": "decide",
+      "label": "발사할지 정한다",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "run",
+      "label": "실행한다",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "hear",
+      "label": "들린다 · 남는다",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "groups": [
+    {
+      "id": "twosound",
+      "label": "소리가 나는 두 곳",
+      "lane": "sound",
+      "fromCol": 3,
+      "toCol": 5,
+      "variant": "emphasis"
+    }
+  ],
+  "mainPath": [
+    "tick",
+    "due",
+    "type",
+    "seq",
+    "sse",
+    "out"
+  ],
+  "nodes": [
+    {
+      "id": "tick",
+      "lane": "sched",
+      "col": 0,
+      "type": "backend",
+      "label": "매분 tick",
+      "sublabel": "services/scheduler.js",
+      "tag": "지금 분 == 예약 분?",
+      "width": 150
+    },
+    {
+      "id": "due",
+      "lane": "sched",
+      "col": 1,
+      "type": "backend",
+      "label": "오늘 아직 안 나간 것",
+      "sublabel": "last_fired != 오늘",
+      "width": 150
+    },
+    {
+      "id": "type",
+      "lane": "run",
+      "col": 2,
+      "type": "backend",
+      "label": "유형에 따라 갈라진다",
+      "sublabel": "text · audio · bgm · flow",
+      "width": 150,
+      "tag": "유형 5종"
+    },
+    {
+      "id": "seq",
+      "lane": "run",
+      "col": 3,
+      "type": "backend",
+      "label": "자동방송 5종",
+      "sublabel": "broadcastSequencer.js",
+      "width": 150
+    },
+    {
+      "id": "flow",
+      "lane": "run",
+      "col": 4,
+      "type": "backend",
+      "label": "연속 흐름",
+      "sublabel": "flowRunner.js",
+      "width": 150
+    },
+    {
+      "id": "tts",
+      "lane": "sound",
+      "col": 3,
+      "type": "backend",
+      "label": "안내 음성 · 차임벨",
+      "sublabel": "Supertonic 3 → 서버 PC 스피커",
+      "width": 150
+    },
+    {
+      "id": "sse",
+      "lane": "sound",
+      "col": 4,
+      "type": "messagebus",
+      "label": "SSE 재생 지시",
+      "sublabel": "services/sse.js",
+      "width": 150
+    },
+    {
+      "id": "out",
+      "lane": "sound",
+      "col": 5,
+      "type": "frontend",
+      "label": "브라우저가 낸다",
+      "sublabel": "음원 · BGM · 영상",
+      "width": 150
+    },
+    {
+      "id": "rec",
+      "lane": "log",
+      "col": 4,
+      "type": "database",
+      "label": "broadcasts 한 줄",
+      "sublabel": "성공/실패 · last_fired",
+      "width": 150
+    },
+    {
+      "id": "watch",
+      "lane": "log",
+      "col": 5,
+      "type": "security",
+      "label": "예정 +5분 감시",
+      "sublabel": "watchdog.js",
+      "tag": "기록이 없으면 경보",
+      "width": 150
+    }
+  ],
+  "edges": [
+    {
+      "id": "tick-due",
+      "from": "tick",
+      "to": "due",
+      "role": "main"
+    },
+    {
+      "id": "due-type",
+      "from": "due",
+      "to": "type",
+      "role": "main"
+    },
+    {
+      "id": "type-seq",
+      "from": "type",
+      "to": "seq",
+      "role": "main"
+    },
+    {
+      "id": "seq-flow",
+      "from": "seq",
+      "to": "flow",
+      "role": "branch",
+      "label": "흐름 예약이면",
+      "variant": "dashed"
+    },
+    {
+      "id": "seq-tts",
+      "from": "seq",
+      "to": "tts",
+      "role": "branch",
+      "label": "안내 음성이면"
+    },
+    {
+      "id": "seq-sse",
+      "from": "seq",
+      "to": "sse",
+      "role": "main",
+      "label": "재생 지시"
+    },
+    {
+      "id": "sse-out",
+      "from": "sse",
+      "to": "out",
+      "role": "main"
+    },
+    {
+      "id": "seq-rec",
+      "from": "seq",
+      "to": "rec",
+      "role": "async",
+      "label": "결과 기록"
+    },
+    {
+      "id": "rec-watch",
+      "from": "rec",
+      "to": "watch",
+      "role": "error",
+      "label": "기록이 없으면"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "rose",
+      "title": "놓치면 그날은 없다",
+      "items": [
+        "발동 조건은 '지금 분 == 예약 분' 정확 일치 하나뿐이다",
+        "서버가 그 1분에 멈춰 있었으면 그 방송은 그날 안 나간다",
+        "유예창(catch-up)은 아직 없다 — 설계는 TASKS.md에 적어 뒀다"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "소리는 두 갈래로 나간다",
+      "items": [
+        "안내 음성 · 차임벨 → 서버 PC 스피커(브라우저 없어도 난다)",
+        "음원 · BGM · 영상 → 쉬운 화면 브라우저(창이 닫히면 안 난다)",
+        "새 방송이 시작되면 앞에서 나던 소리를 끊는다 — services/broadcastGate.js",
+        "발동이 아예 없으면 이력에 행조차 안 생긴다 — 그래서 +5분 감시가 따로 본다"
+      ]
+    }
+  ]
+}

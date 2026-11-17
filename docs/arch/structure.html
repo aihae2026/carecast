@@ -1,0 +1,291 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="generator" content="build-guide-blueprint.cjs — structure.json schema 2">
+<title>CareCast 전체 설계도 — 안내도와 같은 배치, 코드 파일 기준</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>:root{--well:#0D1116}
+body{margin:0;background:var(--well);min-height:100vh;color:#8895A4;
+     font-family:'Noto Sans KR',system-ui,sans-serif}
+#bpWrap{margin:0;padding:12px 10px 4px;display:flex;justify-content:center}
+svg{max-width:1280px;width:100%;height:auto}
+.cap{max-width:1280px;margin:0 auto;padding:10px 14px 16px;font-size:13px;line-height:1.6;
+     display:flex;gap:8px;align-items:flex-start}
+.capNo{flex:none;min-width:20px;height:20px;border-radius:999px;background:#2C3A49;color:#E7EDF3;
+       font-size:12px;display:grid;place-items:center}
+#bpWrap .n, #bpWrap .b{cursor:pointer}
+#bpWrap .n:focus-visible .nbox, #bpWrap .b:focus-visible circle{outline:2px solid #E7EDF3}
+#bpWrap .n .nbox{transition:stroke .15s, filter .15s}
+#bpWrap .n:hover .nbox{stroke:#E7EDF3; filter:brightness(1.35)}
+#bpWrap .n, #bpWrap .b, #bpWrap .w, #bpWrap .wl{transition:opacity .18s}
+#bpWrap.sel .n, #bpWrap.sel .b, #bpWrap.sel .w, #bpWrap.sel .wl{opacity:.17}
+#bpWrap.sel .n.on, #bpWrap.sel .b.on, #bpWrap.sel .w.on, #bpWrap.sel .wl.on{opacity:1}
+#bpWrap.sel .w.on{stroke-width:4}
+#bpWrap.sel .n.on .nbox{stroke:#E7EDF3}</style>
+<figure id="bpWrap"><svg viewBox="0 0 1710 620" role="img" aria-label="CareCast 전체 설계도 — 안내도와 같은 배치, 코드 파일 기준"
+    style="display:block;width:100%;height:auto;background:var(--well)"
+    font-family="'Noto Sans KR', Pretendard, system-ui, sans-serif">
+<defs>
+<marker id="ah-wire" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#4F8EF7"/></marker>
+<marker id="ah-sound" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#F97316"/></marker>
+<marker id="ah-quiet" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#55606D"/></marker>
+<marker id="ah-store" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#8B98A8"/></marker>
+<marker id="ah-watch" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#22C55E"/></marker>
+<marker id="ah-faint" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#242D38"/></marker>
+</defs>
+<rect x="16" y="120" width="288" height="380" rx="14" fill="none"
+      stroke="#242D38" stroke-opacity="1" stroke-width="1.5" stroke-dasharray="7 5"/>
+<text x="30" y="112" font-size="13" font-weight="700" fill="#77848F">예약을 넣는 곳 — 사무실이나 폰</text>
+<rect x="384" y="120" width="952" height="380" rx="14" fill="none"
+      stroke="#4F8EF7" stroke-opacity="0.55" stroke-width="1.5"/>
+<text x="398" y="112" font-size="13" font-weight="700" fill="#BFD6F6">방송실 — 서버 한 대</text>
+<rect x="1396" y="120" width="298" height="380" rx="14" fill="none"
+      stroke="#F97316" stroke-opacity="0.55" stroke-width="1.5"/>
+<text x="1410" y="112" font-size="13" font-weight="700" fill="#F7CBA4">홀 — 소리가 나는 곳</text>
+<polyline class="w" data-w="admin-api" data-from="admin" data-to="api" data-num="1" points="280,194 344,194 344,344 420,344" fill="none" stroke="#4F8EF7" stroke-width="2" marker-end="url(#ah-wire)" stroke-linejoin="round"/>
+<polyline class="w" data-w="phone-api" data-from="phone" data-to="api" data-num="" points="280,344 420,344" fill="none" stroke="#4F8EF7" stroke-width="2" marker-end="url(#ah-wire)" stroke-linejoin="round"/>
+<polyline class="w" data-w="ai-api" data-from="ai" data-to="api" data-num="" points="280,460 344,460 344,366 420,366" fill="none" stroke="#55606D" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ah-quiet)" stroke-linejoin="round"/>
+<polyline class="w" data-w="api-db" data-from="api" data-to="db" data-num="2" points="530,388 530,430" fill="none" stroke="#4F8EF7" stroke-width="2" marker-end="url(#ah-wire)" stroke-linejoin="round"/>
+<polyline class="w" data-w="db-scheduler" data-from="db" data-to="scheduler" data-num="" points="420,455 402,455 402,194 420,194" fill="none" stroke="#55606D" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ah-quiet)" stroke-linejoin="round"/>
+<polyline class="w" data-w="scheduler-sequencer" data-from="scheduler" data-to="sequencer" data-num="3" points="640,194 740,194" fill="none" stroke="#4F8EF7" stroke-width="3" marker-end="url(#ah-wire)" stroke-linejoin="round"/>
+<polyline class="w" data-w="sequencer-queue" data-from="sequencer" data-to="queue" data-num="" points="980,194 1080,194" fill="none" stroke="#4F8EF7" stroke-width="2" marker-end="url(#ah-wire)" stroke-linejoin="round"/>
+<polyline class="w" data-w="sequencer-flow" data-from="sequencer" data-to="flow" data-num="4" points="860,238 860,300" fill="none" stroke="#4F8EF7" stroke-width="2" marker-end="url(#ah-wire)" stroke-linejoin="round"/>
+<polyline class="w" data-w="sequencer-tts" data-from="sequencer" data-to="tts" data-num="" points="980,215 1010,215 1010,460 1040,460" fill="none" stroke="#4F8EF7" stroke-width="2" marker-end="url(#ah-wire)" stroke-linejoin="round"/>
+<polyline class="w" data-w="sequencer-sse" data-from="sequencer" data-to="sse" data-num="5" points="920,238 920,262 1190,262 1190,300" fill="none" stroke="#4F8EF7" stroke-width="2" marker-end="url(#ah-wire)" stroke-linejoin="round"/>
+<polyline class="w" data-w="flow-sse" data-from="flow" data-to="sse" data-num="" points="980,344 1080,344" fill="none" stroke="#4F8EF7" stroke-width="2" marker-end="url(#ah-wire)" stroke-linejoin="round"/>
+<polyline class="w" data-w="queue-speaker" data-from="queue" data-to="speaker" data-num="6" points="1300,194 1420,194" fill="none" stroke="#F97316" stroke-width="3" marker-end="url(#ah-sound)" stroke-linejoin="round"/>
+<polyline class="w" data-w="sse-easy" data-from="sse" data-to="easy" data-num="7" points="1300,344 1420,344" fill="none" stroke="#F97316" stroke-width="3" marker-end="url(#ah-sound)" stroke-linejoin="round"/>
+<polyline class="w" data-w="easy-tv" data-from="easy" data-to="tv" data-num="" points="1545,388 1545,430" fill="none" stroke="#F97316" stroke-width="2" marker-end="url(#ah-sound)" stroke-linejoin="round"/>
+<polyline class="w" data-w="scheduler-internet" data-from="scheduler" data-to="internet" data-num="" points="530,150 530,108 860,108 860,86" fill="none" stroke="#55606D" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ah-quiet)" stroke-linejoin="round"/>
+<polyline class="w" data-w="guard-db" data-from="guard" data-to="db" data-num="8" points="860,530 860,490" fill="none" stroke="#22C55E" stroke-width="2" marker-end="url(#ah-watch)" stroke-linejoin="round"/>
+<polyline class="w" data-w="starter-easy" data-from="starter" data-to="easy" data-num="" points="1685,530 1685,344 1670,344" fill="none" stroke="#22C55E" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ah-watch)" stroke-linejoin="round"/>
+<g class="n" data-n="internet" tabindex="0" role="button" aria-label="weather.js · youtube.js — 외부 API. 끊겨도 방송은 나간다">
+<rect class="nbox" x="740" y="30" width="300" height="56" rx="10" fill="#141A21"
+      stroke="#2E3947" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="754" y="54" font-size="15" font-weight="700" fill="#E7EDF3"
+        font-family="'IBM Plex Mono', ui-monospace, monospace">weather.js · youtube.js</text>
+<text x="754" y="73" font-size="13" fill="#9BA8B6">외부 API — 끊겨도 방송은 나간다</text>
+</g>
+<g class="n" data-n="admin" tabindex="0" role="button" aria-label="AdminMode.jsx — 관리자 화면. 예약 · 순서 · 설정">
+<rect class="nbox" x="40" y="150" width="240" height="88" rx="10" fill="#141A21"
+      stroke="#3B5A8C" stroke-width="1.5"/>
+<text x="54" y="177" font-size="15" font-weight="700" fill="#E7EDF3"
+        font-family="'IBM Plex Mono', ui-monospace, monospace">AdminMode.jsx</text>
+<text x="54" y="197" font-size="13" fill="#BFD6F6">관리자 화면</text>
+<text x="54" y="215" font-size="13" fill="#8895A4">예약 · 순서 · 설정</text>
+</g>
+<g class="n" data-n="phone" tabindex="0" role="button" aria-label="EasyMode.jsx — 폰 · 태블릿. 지금 방송 · 원격 제어">
+<rect class="nbox" x="40" y="300" width="240" height="88" rx="10" fill="#141A21"
+      stroke="#3B5A8C" stroke-width="1.5"/>
+<text x="54" y="327" font-size="15" font-weight="700" fill="#E7EDF3"
+        font-family="'IBM Plex Mono', ui-monospace, monospace">EasyMode.jsx</text>
+<text x="54" y="347" font-size="13" fill="#BFD6F6">폰 · 태블릿</text>
+<text x="54" y="365" font-size="13" fill="#8895A4">지금 방송 · 원격 제어</text>
+</g>
+<g class="n" data-n="ai" tabindex="0" role="button" aria-label="geminiClient.js — Gemini. 초안만 · 확정은 사람">
+<rect class="nbox" x="40" y="430" width="240" height="60" rx="10" fill="#141A21"
+      stroke="#2E3947" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="54" y="454" font-size="15" font-weight="700" fill="#E7EDF3"
+        font-family="'IBM Plex Mono', ui-monospace, monospace">geminiClient.js</text>
+<text x="54" y="473" font-size="13" fill="#9BA8B6">Gemini — 초안만 · 확정은 사람</text>
+</g>
+<g class="n" data-n="scheduler" tabindex="0" role="button" aria-label="scheduler.js — 타이머. 매분 DB를 본다">
+<rect class="nbox" x="420" y="150" width="220" height="88" rx="10" fill="#141A21"
+      stroke="#3B5A8C" stroke-width="1.5"/>
+<text x="434" y="177" font-size="15" font-weight="700" fill="#E7EDF3"
+        font-family="'IBM Plex Mono', ui-monospace, monospace">scheduler.js</text>
+<text x="434" y="197" font-size="13" fill="#BFD6F6">타이머</text>
+<text x="434" y="215" font-size="13" fill="#8895A4">매분 DB를 본다</text>
+</g>
+<g class="n" data-n="sequencer" tabindex="0" role="button" aria-label="broadcastSequencer.js — 방송 진행. 자동방송 5종">
+<rect class="nbox" x="740" y="150" width="240" height="88" rx="10" fill="#141A21"
+      stroke="#3B5A8C" stroke-width="1.5"/>
+<text x="754" y="177" font-size="15" font-weight="700" fill="#E7EDF3"
+        font-family="'IBM Plex Mono', ui-monospace, monospace">broadcastSequencer.js</text>
+<text x="754" y="197" font-size="13" fill="#BFD6F6">방송 진행</text>
+<text x="754" y="215" font-size="13" fill="#8895A4">자동방송 5종</text>
+</g>
+<g class="n" data-n="queue" tabindex="0" role="button" aria-label="audioQueue.js — 오디오 큐. 한 번에 하나씩">
+<rect class="nbox" x="1080" y="150" width="220" height="88" rx="10" fill="#141A21"
+      stroke="#3B5A8C" stroke-width="1.5"/>
+<text x="1094" y="177" font-size="15" font-weight="700" fill="#E7EDF3"
+        font-family="'IBM Plex Mono', ui-monospace, monospace">audioQueue.js</text>
+<text x="1094" y="197" font-size="13" fill="#BFD6F6">오디오 큐</text>
+<text x="1094" y="215" font-size="13" fill="#8895A4">한 번에 하나씩</text>
+</g>
+<g class="n" data-n="api" tabindex="0" role="button" aria-label="server/index.js — HTTP 서버. Express :3001 · 라우트 25">
+<rect class="nbox" x="420" y="300" width="220" height="88" rx="10" fill="#141A21"
+      stroke="#3B5A8C" stroke-width="1.5"/>
+<text x="434" y="327" font-size="15" font-weight="700" fill="#E7EDF3"
+        font-family="'IBM Plex Mono', ui-monospace, monospace">server/index.js</text>
+<text x="434" y="347" font-size="13" fill="#BFD6F6">HTTP 서버</text>
+<text x="434" y="365" font-size="13" fill="#8895A4">Express :3001 · 라우트 25</text>
+</g>
+<g class="n" data-n="flow" tabindex="0" role="button" aria-label="flowRunner.js — 연속 흐름. 단계 묶음 · 시각 앵커">
+<rect class="nbox" x="740" y="300" width="240" height="88" rx="10" fill="#141A21"
+      stroke="#3B5A8C" stroke-width="1.5"/>
+<text x="754" y="327" font-size="15" font-weight="700" fill="#E7EDF3"
+        font-family="'IBM Plex Mono', ui-monospace, monospace">flowRunner.js</text>
+<text x="754" y="347" font-size="13" fill="#BFD6F6">연속 흐름</text>
+<text x="754" y="365" font-size="13" fill="#8895A4">단계 묶음 · 시각 앵커</text>
+</g>
+<g class="n" data-n="sse" tabindex="0" role="button" aria-label="sse.js — 재생 지시(SSE). 서버→브라우저 단방향">
+<rect class="nbox" x="1080" y="300" width="220" height="88" rx="10" fill="#141A21"
+      stroke="#3B5A8C" stroke-width="1.5"/>
+<text x="1094" y="327" font-size="15" font-weight="700" fill="#E7EDF3"
+        font-family="'IBM Plex Mono', ui-monospace, monospace">sse.js</text>
+<text x="1094" y="347" font-size="13" fill="#BFD6F6">재생 지시(SSE)</text>
+<text x="1094" y="365" font-size="13" fill="#8895A4">서버→브라우저 단방향</text>
+</g>
+<g class="n" data-n="db" tabindex="0" role="button" aria-label="database.db (SQLite) — 데이터베이스. 예약 · 음원 · 설정 · 나간 기록">
+<rect class="nbox" x="420" y="430" width="520" height="60" rx="10" fill="#141A21"
+      stroke="#3E4A58" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="434" y="454" font-size="15" font-weight="700" fill="#E7EDF3"
+        font-family="'IBM Plex Mono', ui-monospace, monospace">database.db (SQLite)</text>
+<text x="434" y="473" font-size="13" fill="#B9C4D0">데이터베이스 — 예약 · 음원 · 설정 · 나간 기록</text>
+</g>
+<g class="n" data-n="tts" tabindex="0" role="button" aria-label="tts.js — 음성 합성. 문장을 소리로 · 미리">
+<rect class="nbox" x="1040" y="430" width="260" height="60" rx="10" fill="#141A21"
+      stroke="#3B5A8C" stroke-width="1.5"/>
+<text x="1054" y="454" font-size="15" font-weight="700" fill="#E7EDF3"
+        font-family="'IBM Plex Mono', ui-monospace, monospace">tts.js</text>
+<text x="1054" y="473" font-size="13" fill="#BFD6F6">음성 합성 — 문장을 소리로 · 미리</text>
+</g>
+<g class="n" data-n="speaker" tabindex="0" role="button" aria-label="audioBackend.js — 천장 스피커. 안내 음성 · 차임 · 마이크">
+<rect class="nbox" x="1420" y="150" width="250" height="88" rx="10" fill="#141A21"
+      stroke="#8A5A2B" stroke-width="1.5"/>
+<text x="1434" y="177" font-size="15" font-weight="700" fill="#E7EDF3"
+        font-family="'IBM Plex Mono', ui-monospace, monospace">audioBackend.js</text>
+<text x="1434" y="197" font-size="13" fill="#F7CBA4">천장 스피커</text>
+<text x="1434" y="215" font-size="13" fill="#8895A4">안내 음성 · 차임 · 마이크</text>
+</g>
+<g class="n" data-n="easy" tabindex="0" role="button" aria-label="components/broadcast — 브라우저(방송 화면). 음원 · BGM · 영상 재생">
+<rect class="nbox" x="1420" y="300" width="250" height="88" rx="10" fill="#141A21"
+      stroke="#8A5A2B" stroke-width="1.5"/>
+<text x="1434" y="327" font-size="15" font-weight="700" fill="#E7EDF3"
+        font-family="'IBM Plex Mono', ui-monospace, monospace">components/broadcast</text>
+<text x="1434" y="347" font-size="13" fill="#F7CBA4">브라우저(방송 화면)</text>
+<text x="1434" y="365" font-size="13" fill="#8895A4">음원 · BGM · 영상 재생</text>
+</g>
+<g class="n" data-n="tv" tabindex="0" role="button" aria-label="YouTubeBGM.jsx — TV. 체조 영상 · 유튜브 송출">
+<rect class="nbox" x="1420" y="430" width="250" height="60" rx="10" fill="#141A21"
+      stroke="#8A5A2B" stroke-width="1.5"/>
+<text x="1434" y="454" font-size="15" font-weight="700" fill="#E7EDF3"
+        font-family="'IBM Plex Mono', ui-monospace, monospace">YouTubeBGM.jsx</text>
+<text x="1434" y="473" font-size="13" fill="#F7CBA4">TV — 체조 영상 · 유튜브 송출</text>
+</g>
+<g class="n" data-n="guard" tabindex="0" role="button" aria-label="watchdog.js · backup.js · autoShutdown.js — 감시 · 백업 · 자동 종료. 안 나가면 경보 · 서버 켤 때 백업 · 정한 시각에 PC 종료">
+<rect class="nbox" x="400" y="530" width="770" height="60" rx="10" fill="#141A21"
+      stroke="#2E5D43" stroke-width="1.5"/>
+<text x="414" y="554" font-size="15" font-weight="700" fill="#E7EDF3"
+        font-family="'IBM Plex Mono', ui-monospace, monospace">watchdog.js · backup.js · autoShutdown.js</text>
+<text x="414" y="573" font-size="13" fill="#A7E3C0">감시 · 백업 · 자동 종료 — 안 나가면 경보 · 서버 켤 때 백업 · 정한 시각에 PC 종료</text>
+</g>
+<g class="n" data-n="starter" tabindex="0" role="button" aria-label="carecast-start.bat + carecast-loop.bat — 자동 재시작. 서버가 멎으면 다시 띄운다 · git이 갱신">
+<rect class="nbox" x="1274" y="530" width="420" height="60" rx="10" fill="#141A21"
+      stroke="#2E5D43" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="1288" y="554" font-size="15" font-weight="700" fill="#E7EDF3"
+        font-family="'IBM Plex Mono', ui-monospace, monospace">carecast-start.bat + carecast-loop.bat</text>
+<text x="1288" y="573" font-size="13" fill="#A7E3C0">자동 재시작 — 서버가 멎으면 다시 띄운다 · git이 갱신</text>
+</g>
+<g class="wl" data-w="admin-api"><rect x="300.3" y="282.0" width="87.4" height="20" rx="5" fill="#0D1116"/><text x="344.0" y="296.5" font-size="13" fill="#B9C6D4" text-anchor="middle">예약 · 설정</text></g>
+<g class="wl" data-w="ai-api"><rect x="324.0" y="410.0" width="40.0" height="20" rx="5" fill="#0D1116"/><text x="344.0" y="424.5" font-size="13" fill="#B9C6D4" text-anchor="middle">초안</text></g>
+<g class="wl" data-w="api-db"><rect x="577.0" y="399.0" width="66.0" height="20" rx="5" fill="#0D1116"/><text x="610.0" y="413.5" font-size="13" fill="#B9C6D4" text-anchor="middle">저장한다</text></g>
+<g class="wl" data-w="db-scheduler"><rect x="358.9" y="259.0" width="86.2" height="20" rx="5" fill="#0D1116"/><text x="402.0" y="273.5" font-size="13" fill="#B9C6D4" text-anchor="middle">매분 읽는다</text></g>
+<g class="wl" data-w="scheduler-sequencer"><rect x="646.9" y="154.0" width="86.2" height="20" rx="5" fill="#0D1116"/><text x="690.0" y="168.5" font-size="13" fill="#B9C6D4" text-anchor="middle">정시에 시작</text></g>
+<g class="wl" data-w="sequencer-queue"><rect x="993.4" y="154.0" width="73.2" height="20" rx="5" fill="#0D1116"/><text x="1030.0" y="168.5" font-size="13" fill="#B9C6D4" text-anchor="middle">줄 세운다</text></g>
+<g class="wl" data-w="sequencer-flow"><rect x="898.4" y="259.0" width="73.2" height="20" rx="5" fill="#0D1116"/><text x="935.0" y="273.5" font-size="13" fill="#B9C6D4" text-anchor="middle">단계 위임</text></g>
+<g class="wl" data-w="sequencer-tts"><rect x="960.4" y="399.0" width="99.2" height="20" rx="5" fill="#0D1116"/><text x="1010.0" y="413.5" font-size="13" fill="#B9C6D4" text-anchor="middle">문장을 넘긴다</text></g>
+<g class="wl" data-w="sequencer-sse"><rect x="1068.4" y="252.0" width="73.2" height="20" rx="5" fill="#0D1116"/><text x="1105.0" y="266.5" font-size="13" fill="#B9C6D4" text-anchor="middle">재생 지시</text></g>
+<g class="wl" data-w="queue-speaker"><rect x="1299.7" y="110.0" width="120.6" height="20" rx="5" fill="#0D1116"/><text x="1360.0" y="124.5" font-size="13" fill="#B9C6D4" text-anchor="middle">안내 음성 · 차임</text></g>
+<g class="wl" data-w="sse-easy"><rect x="1294.8" y="399.0" width="130.4" height="20" rx="5" fill="#0D1116"/><text x="1360.0" y="413.5" font-size="13" fill="#B9C6D4" text-anchor="middle">음원 · BGM · 영상</text></g>
+<g class="wl" data-w="easy-tv"><rect x="1591.3" y="399.0" width="61.5" height="20" rx="5" fill="#0D1116"/><text x="1622.0" y="413.5" font-size="13" fill="#B9C6D4" text-anchor="middle">TV 송출</text></g>
+<g class="wl" data-w="scheduler-internet"><rect x="649.8" y="94.0" width="100.4" height="20" rx="5" fill="#0D1116"/><text x="700.0" y="108.5" font-size="13" fill="#B9C6D4" text-anchor="middle">날씨 · 유튜브</text></g>
+<g class="wl" data-w="guard-db"><rect x="929.7" y="500.0" width="120.6" height="20" rx="5" fill="#0D1116"/><text x="990.0" y="514.5" font-size="13" fill="#B9C6D4" text-anchor="middle">기록 확인 · 백업</text></g>
+<g class="wl" data-w="starter-easy"><rect x="1565.5" y="495.0" width="108.9" height="20" rx="5" fill="#0D1116"/><text x="1620.0" y="509.5" font-size="13" fill="#B9C6D4" text-anchor="middle">Edge 창을 연다</text></g>
+<g class="b" data-num="1" tabindex="0" role="button" aria-label="1번 단계"><circle cx="344" cy="222" r="12" fill="#E7EDF3"/><text x="344" y="226.5" font-size="13" font-weight="700" fill="#14324F" text-anchor="middle">1</text></g>
+<g class="b" data-num="2" tabindex="0" role="button" aria-label="2번 단계"><circle cx="530" cy="409" r="12" fill="#E7EDF3"/><text x="530" y="413.5" font-size="13" font-weight="700" fill="#14324F" text-anchor="middle">2</text></g>
+<g class="b" data-num="3" tabindex="0" role="button" aria-label="3번 단계"><circle cx="690" cy="194" r="12" fill="#E7EDF3"/><text x="690" y="198.5" font-size="13" font-weight="700" fill="#14324F" text-anchor="middle">3</text></g>
+<g class="b" data-num="4" tabindex="0" role="button" aria-label="4번 단계"><circle cx="860" cy="269" r="12" fill="#E7EDF3"/><text x="860" y="273.5" font-size="13" font-weight="700" fill="#14324F" text-anchor="middle">4</text></g>
+<g class="b" data-num="5" tabindex="0" role="button" aria-label="5번 단계"><circle cx="1010" cy="262" r="12" fill="#E7EDF3"/><text x="1010" y="266.5" font-size="13" font-weight="700" fill="#14324F" text-anchor="middle">5</text></g>
+<g class="b" data-num="6" tabindex="0" role="button" aria-label="6번 단계"><circle cx="1360" cy="194" r="12" fill="#E7EDF3"/><text x="1360" y="198.5" font-size="13" font-weight="700" fill="#14324F" text-anchor="middle">6</text></g>
+<g class="b" data-num="7" tabindex="0" role="button" aria-label="7번 단계"><circle cx="1360" cy="344" r="12" fill="#E7EDF3"/><text x="1360" y="348.5" font-size="13" font-weight="700" fill="#14324F" text-anchor="middle">7</text></g>
+<g class="b" data-num="8" tabindex="0" role="button" aria-label="8번 단계"><circle cx="860" cy="510" r="12" fill="#E7EDF3"/><text x="860" y="514.5" font-size="13" font-weight="700" fill="#14324F" text-anchor="middle">8</text></g>
+</svg></figure>
+<div class="cap"><span id="bpBadge" class="capNo" hidden></span><span id="bpCap">아무것도 안 눌렀을 때는 전체를 봅니다.</span></div>
+<script>
+(function () {
+  const wrap = document.getElementById('bpWrap')
+  if (!wrap) return
+  const svg = wrap.querySelector('svg')
+  const nodes = [...wrap.querySelectorAll('.n')]
+  const wires = [...wrap.querySelectorAll('.w')]
+  const badges = [...wrap.querySelectorAll('.b')]
+  const wlabels = [...wrap.querySelectorAll('.wl')]
+  const lightWire = (w) => { w.classList.add('on'); wlabels.find(l => l.dataset.w === w.dataset.w)?.classList.add('on') }
+  const cap = document.getElementById('bpCap')
+  const badge = document.getElementById('bpBadge')
+  const STEPS = badges.map(b => b.dataset.num).filter(Boolean).sort((a, b) => a - b)
+  let stepIdx = -1
+
+  const clear = () => {
+    wrap.classList.remove('sel')
+    for (const el of [...nodes, ...wires, ...badges, ...wlabels]) el.classList.remove('on')
+    badge.hidden = true
+    cap.textContent = '아무것도 안 눌렀을 때는 전체를 봅니다.'
+    stepIdx = -1
+  }
+  const nodeName = (id) => {
+    const g = nodes.find(n => n.dataset.n === id)
+    return g ? (g.getAttribute('aria-label') || '').split(' — ')[0] : id
+  }
+  const showNode = (id) => {
+    wrap.classList.add('sel')
+    for (const el of [...nodes, ...wires, ...badges, ...wlabels]) el.classList.remove('on')
+    const self = nodes.find(n => n.dataset.n === id)
+    if (self) self.classList.add('on')
+    const linked = new Set([id])
+    for (const w of wires) {
+      if (w.dataset.from !== id && w.dataset.to !== id) continue
+      lightWire(w)
+      linked.add(w.dataset.from); linked.add(w.dataset.to)
+      if (w.dataset.num) badges.find(b => b.dataset.num === w.dataset.num)?.classList.add('on')
+    }
+    for (const n of nodes) if (linked.has(n.dataset.n)) n.classList.add('on')
+    badge.hidden = true
+    const label = self ? self.getAttribute('aria-label') : id
+    cap.textContent = label + ' — 이어진 것만 남겼습니다.'
+  }
+  const showStep = (num) => {
+    wrap.classList.add('sel')
+    for (const el of [...nodes, ...wires, ...badges, ...wlabels]) el.classList.remove('on')
+    const w = wires.find(x => x.dataset.num === String(num))
+    if (!w) return
+    lightWire(w)
+    badges.find(b => b.dataset.num === String(num))?.classList.add('on')
+    for (const n of nodes) if (n.dataset.n === w.dataset.from || n.dataset.n === w.dataset.to) n.classList.add('on')
+    badge.hidden = false
+    badge.textContent = num
+    cap.textContent = nodeName(w.dataset.from) + ' → ' + nodeName(w.dataset.to)
+  }
+
+  for (const n of nodes) {
+    n.addEventListener('click', () => (n.classList.contains('on') && wrap.classList.contains('sel') ? clear() : showNode(n.dataset.n)))
+    n.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showNode(n.dataset.n) } })
+  }
+  for (const b of badges) {
+    b.addEventListener('click', () => showStep(b.dataset.num))
+    b.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showStep(b.dataset.num) } })
+  }
+  document.getElementById('bpStep')?.addEventListener('click', () => {
+    stepIdx = (stepIdx + 1) % STEPS.length
+    showStep(STEPS[stepIdx])
+  })
+  document.getElementById('bpReset')?.addEventListener('click', clear)
+  svg?.addEventListener('click', e => { if (e.target === svg) clear() })
+})()
+</script>

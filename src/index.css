@@ -1,0 +1,462 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-ds-v3-bg text-ds-v3-ink;
+    /* 일반 UI 의 기본 서체는 Pretendard 하나로 통일한다(T-8). Inter 는 받아 놓고
+       `font-inter` 사용처가 0곳이었고, 유일한 실사용이던 `.nums` 의 숫자 전용 교체도
+       걷었다 — 한 줄 안에서 서체가 갈리는 것이 정돈을 깨는 자리였다. */
+    font-family: 'Pretendard', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  /* 버튼 클릭 스케일 */
+  .btn-press {
+    @apply active:scale-[0.98] transition-all duration-100;
+  }
+
+  /* ── 화면 최대 폭 — **여기 한 곳에서만 정한다** (2026-09-11 사용자 지적) ──────────
+     중단점만 있으면 그 사이 폭에서 내용이 그냥 옆으로 늘어난다. 관리자 화면은 그 제한이
+     없어서 넓은 모니터에서 카드가 가로로 퍼져 읽기 불편했다.
+
+     **1180px 인 이유**: 디자인 캔버스의 데스크톱 폭은 1440 이고 사이드바가 240 이다
+     (`Sidebar.jsx` 의 `w-60`). 1440 − 240 = 1200 이라, 좌우 여백을 빼면 본문은 딱 이 폭이다.
+     즉 캔버스 위에서는 지금과 **한 픽셀도 안 달라지고**, 그보다 넓은 모니터에서만
+     가운데로 모이고 양옆이 여백으로 남는다. `GuideMapPage` 가 이미 같은 값을 쓴다.
+
+     쉬운 화면(`SimpleMode`)은 이미 제 폭을 묶고 있다 — 그쪽 규칙은 그대로 둔다
+     (세로로 쌓는 동안 834, wide 에서 1440). 두 화면은 판이 다르다.
+     `server/test/layout-max-width.test.js` 가 이 클래스가 실제로 쓰이는지 고정한다. */
+  .page-shell {
+    @apply mx-auto w-full max-w-[1180px] px-6 laptop:px-8;
+  }
+
+  /* ── 음량 슬라이더 (2026-09-11 사용자 지적: "이따구로 하면 조정하고 싶겠냐") ──────────
+     예전에는 `accent-*` 만 걸어 둔 기본 range 였다. 그러면 레일이 얇고 손잡이가 작아서
+     **마우스로 잡기가 어렵다** — 요양원 실무자가 매일 만지는 자리다.
+
+     · 레일 8px, 손잡이 20px — 손이 떨려도 잡힌다.
+     · 채운 부분은 `currentColor` 다. 채널 색을 `text-*` 하나로 정하면 레일·손잡이가 함께 따라온다.
+     · 채운 비율은 `--pct` 로 받는다(인라인 style). 브라우저 기본 채움은 크로스브라우저가 아니다.
+     · 포커스 링을 남긴다 — 키보드로도 조절할 수 있어야 한다(UX-42).
+     Firefox 는 `::-moz-*` 로 같은 모습을 따로 적는다. */
+  .vol-range {
+    @apply w-full cursor-pointer bg-transparent;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 24px;
+  }
+  .vol-range::-webkit-slider-runnable-track {
+    height: 8px;
+    border-radius: 9999px;
+    background: linear-gradient(to right,
+      currentColor 0 var(--pct, 0%), #E4E9F2 var(--pct, 0%) 100%);
+  }
+  .vol-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    margin-top: -6px;
+    border-radius: 9999px;
+    background: #fff;
+    border: 2px solid currentColor;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+    transition: transform 0.08s ease;
+  }
+  .vol-range:active::-webkit-slider-thumb { transform: scale(1.12); }
+  .vol-range:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 4px rgb(79 142 247 / 0.25);
+  }
+  .vol-range::-moz-range-track {
+    height: 8px;
+    border-radius: 9999px;
+    background: #E4E9F2;
+  }
+  .vol-range::-moz-range-progress {
+    height: 8px;
+    border-radius: 9999px;
+    background: currentColor;
+  }
+  .vol-range::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 9999px;
+    background: #fff;
+    border: 2px solid currentColor;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+  }
+  .vol-range:disabled { @apply opacity-40 cursor-not-allowed; }
+
+  /* 관리자 모드 공통 카드 (흰색) */
+  .card-base {
+    @apply bg-white rounded-[16px] border border-ds-v3-line p-5;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  /* ── v3 껍데기 스킨 — **화면 파일을 열지 않고 카드 결만 갈아입힌다** (G-49, 2026-09-13)
+     `.card-base` 는 제품 전체 **64곳 / 28파일**이 쓴다. 그중 6파일이 `src/components/easy/`
+     인데 **쉬운 화면은 옛 팔레트(cc-*)에 남기기로 한 화면**이다(G-30). 그래서 `.card-base`
+     정의 자체를 고치면 그 결정을 조용히 깬다.
+
+     범위를 `HomeShell` 루트의 `skin-v3` 한 클래스로 좁힌다 — 통합 홈·캘린더·자동순서·설정만
+     이 결을 입고, 쉬운 화면은 그대로다. 화면 파일 diff 가 **0줄**이라
+     *"설정만큼은 형태에 유지하고"*(사용자 지시)가 기계적으로 보증된다.
+
+     **실제로 바뀌는 것은 둘뿐이다.** 테두리 색 `ds-v3-line`(#E8ECF4)와 `--ds-v3-line`(#E8ECF4)은
+     **같은 값**이라 안 바뀐다. 반경 16→14 와 그림자(검정 6% → 잉크 5%)만 달라진다.
+     **안쪽 패딩 `p-5`(20px)는 손대지 않는다** — 여기를 건드리면 배치가 옮겨간다.
+
+     `@layer utilities` 안에 `.card-base` 와 **같은 층**으로 둔다. components 층에 두면
+     utilities 보다 앞이라 조용히 진다(T-7·G-30 이 경고한 그 함정). 특정도도 (0,2,0)으로 이긴다. */
+  .skin-v3 .card-base {
+    @apply rounded-[14px] border-ds-v3-line bg-ds-v3-surface;
+    box-shadow: var(--ds-v3-shadow-card);
+    /* ── **흰 바탕에 물감 한 방울** (사용자 지시 2026-09-16) ─────────────────────
+       *"이런 설정이나 다른 곳 하얀색 바탕, 두 번째 사진처럼 약간 그라디언트 넣는 게
+         통일감 있고 좋을 것 같지 않아?"*
+
+       간편 화면은 배경에 파랑·자주 물감이 도는데 설정·캘린더의 카드만 **순백**이라,
+       같은 제품인데 두 화면의 결이 달랐다. 같은 두 물감(`--ds-v3-drop-*`)을
+       **아주 옅게** 깔아 결을 잇는다 — 새 색을 만들지 않는다(G-1).
+
+       **4%·3% 다.** 이보다 진하면 물감 위에 글자가 앉는 꼴이 되어 G-4(물감은 글자를
+       받지 않는다)에 걸린다. 이 농도에서는 흰색과의 차이가 눈에 띄지 않을 만큼
+       작아서 **글자 대비가 사실상 그대로다** — 카드가 「하얗다」가 아니라
+       「아주 옅게 물들었다」로만 읽힌다. */
+    background-image: linear-gradient(135deg,
+      rgba(var(--ds-v3-drop-tts), .16) 0%,
+      rgba(var(--ds-v3-drop-bgm), .11) 55%,
+      rgba(var(--ds-v3-drop-tts), .09) 100%);
+  }
+
+  /* ── **흰 면은 카드만이 아니었다** (사용자 지적 2026-09-16) ────────────────────
+     *"이게 바탕이 아직 흰색으로 보이는데?"* — 맞다. 앞 판은 `.card-base` 에만 물감을
+     깔았는데, 실제 화면의 흰 면은 **`bg-white` 257곳 · `bg-ds-v3-surface` 여럿**이
+     따로 칠하고 있었다. 업로드 화면의 큰 빈 자리가 그중 하나다.
+
+     그래서 **클래스 이름으로** 덮는다 — 화면 파일을 257곳 고치지 않고, 이 껍데기
+     안에서만 두 클래스에 같은 물감을 얹는다(`.skin-v3` 범위라 쉬운 화면·방송 화면은
+     그대로다). `background-image` 라서 **바탕색은 흰색 그대로**이고 그 위에 물감이
+     얹힌다 — 흰색을 다른 색으로 바꾸는 것이 아니다.
+
+     `bg-white/70` 같은 반투명은 **클래스 이름이 달라서 안 걸린다**(`.bg-white\/70`).
+     그런 것들은 이미 무언가 위에 얹히는 조각이라 물감을 또 깔면 탁해진다. 잘 갈렸다. */
+  /* **클래스 이름이 아니라 속성으로 집는다.** `.skin-v3 .bg-ds-v3-surface` 로 적으면
+     Tailwind 가 그것을 「그 유틸리티를 다시 정의하는 것」으로 읽고, 바로 위
+     `.card-base` 의 `@apply bg-ds-v3-surface` 와 **순환**이 나서 빌드가 죽는다
+     (실제로 죽었다: *"circular dependency"*). `[class~=]` 는 그 검사에 안 걸린다. */
+  .skin-v3 [class~="bg-white"],
+  .skin-v3 [class~="bg-ds-v3-surface"] {
+    background-image: linear-gradient(135deg,
+      rgba(var(--ds-v3-drop-tts), .16) 0%,
+      rgba(var(--ds-v3-drop-bgm), .11) 55%,
+      rgba(var(--ds-v3-drop-tts), .09) 100%);
+  }
+
+  /* ── **사이드바는 순백이다** (사용자 지시 2026-09-16) ──────────────────────────
+     *"사이드 바는 냅두라고 흰색으로."*
+
+     위 규칙이 `bg-white` 를 전부 물들이는데, 관리자 왼쪽 메뉴판만은 **흰색으로 둔다.**
+     그 판은 세로로 길어서 대각선 물감이 **위아래로 얼룩처럼** 갈리고, 본문 카드들과
+     나란히 서면 두 결이 부딪힌다. 넓고 긴 면은 물감을 안 받는 편이 깔끔하다.
+
+     **이 한 줄이 위 규칙을 되돌린다** — 뒤에 오고 특이도도 같아서 이긴다.
+     `background-image: none` 이지 색을 다시 칠하는 것이 아니다(바탕색은 원래 흰색이다). */
+  .skin-v3 aside[class~="bg-white"] {
+    background-image: none;
+  }
+
+  /* ── **간편모음 서랍도 순백이다** (사용자 지시 2026-09-16) ─────────────────────
+     *"간편모음에서 배경색 넣으니까 얼룩덜룩하잖아 그냥 저기는 흰색 배경으로 해 깔끔하게"*
+
+     **서랍이 흰색이 아니어서가 아니었다.** 서랍은 `bg-ds-v3-surface`(=흰색)인데, 바로 위
+     규칙이 그 클래스에 대각선 물감을 깔고 있었다. 게다가 **서랍 안의 패널들도 같은
+     클래스**라, 320px 폭 안에서 대각선이 **겹겹이** 났다 — 큰 대각선 하나 위에 작은
+     대각선 넷이 각자 다른 각도로 놓인 꼴이다. 거기에 `bg-white/70`(물감을 안 받는 것)이
+     섞이니 얼룩으로 보였다.
+
+     바로 위 사이드바 예외와 **같은 이유·같은 처방**이다: *"넓고 긴 면은 물감을 안 받는
+     편이 깔끔하다."* 서랍은 화면 높이 전체를 쓰는 세로 면이라 여기 딱 해당한다.
+
+     **`#home-drawer` 안으로만 좁힌다.** 간편 화면 본문의 물감은 그대로 둔다 — 사용자가
+     그 결은 좋다고 했다(*"간편화면에서 저녁 마무리 방송 감싼 배경은 좋아, 다른 흰색 배경말이야"*).
+     id 라서 위 규칙(클래스 둘)보다 특이도가 높아 확실히 이긴다. */
+  .skin-v3 #home-drawer,
+  .skin-v3 #home-drawer [class~="bg-white"],
+  .skin-v3 #home-drawer [class~="bg-ds-v3-surface"] {
+    background-image: none;
+  }
+
+  /* ── **간편 화면·초기 설정의 카드와 배너는 순백이다** (사용자 지시 2026-09-17, N15) ────────
+     *"배경에 그라디언트 넣으니까 오래보니까 피곤하다"* → 정정 *"전체 배경을 희게 말고 배경은
+     그라디언트 은은하게 가는데 카드들이나 배너들 말이야"*.
+
+     **배경 물감(HomeShell 두 방울)은 그대로 둔다.** 걷는 것은 그 위 카드·입력칸에 덧칠한
+     대각선 한 겹뿐이다. 처음엔 간편 화면만이었고, 같은 날 새벽 사용자가 **모든 탭으로** 넓혔다
+     (*"캘린더 검색창이랑 캘린더도 흰배경으로 … 다른데는 안됐잖아"*) — 09-16 의 설정·캘린더 카드 물감을 대체한다.
+     표식은 `HomeShell` 뿌리(모든 탭)와 `SetupWizard` 에 선다.
+     **오늘 일과 「다음」 줄의 흐르는 세 방울은 이 규칙과 무관하다** — 그 줄은 자기 층(`HomeToday`)에
+     물감을 따로 그리고, 사용자가 좋다고 했다(*"왜 지금 해당하는 칸 옛날 그라디언트 안됐어"*). */
+  .skin-v3 [data-plain-cards] .card-base,
+  .skin-v3 [data-plain-cards] [class~="bg-white"],
+  .skin-v3 [data-plain-cards] [class~="bg-ds-v3-surface"],
+  [data-plain-cards] .card-base,
+  [data-plain-cards] [class~="bg-white"],
+  [data-plain-cards] [class~="bg-ds-v3-surface"] {
+    background-image: none;
+  }
+
+  /* 초기 설정이 떠 있는 동안에는 떠 있는 「방송 화면」 단추를 감춘다 — 전체 화면 마법사 위로 올라온다. */
+  body[data-cc-setup] button[aria-label="방송 화면 열기"] {
+    display: none;
+  }
+
+  /* 쉬운 모드 카드 (배경색은 카드별로 별도 지정) */
+  .easy-card {
+    @apply rounded-[16px] border border-ds-v3-line p-5 flex flex-col;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    min-height: 280px;
+  }
+
+  /* 모바일: 카드 min-height 해제 */
+  .mobile-compact .easy-card {
+    min-height: auto;
+  }
+
+  /* 입력창 공통 스타일 — **정의는 아래 `@layer components` 로 옮겼다**(2026-09-13).
+     여기 있던 동안 `.input-base pl-9` 같은 조합이 **조용히 안 먹었다**(아래 참고). */
+
+  /* 세로로 줄 맞춰야 하는 숫자 — 시각·볼륨·소요시간·개수.
+     **서체를 갈아끼우지 않는다**(T-8). 예전엔 여기서 Inter 로 바꿔 끼웠는데, 그러면 한 줄
+     안에서 서체가 둘로 갈린다("07:50 아침 방송" 의 숫자와 글자가 다른 폰트). Pretendard 는
+     Inter 메트릭을 바탕으로 만들어져서 폭이 튀지 않고, tabular 숫자도 자체로 지원한다. */
+  .nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ── 글자 역할 여섯 — **크기·행간·굵기는 여기서만 정한다** (T-2, 2026-09-13) ─────────
+ *
+ * 정본은 `docs/audit/design-typography-v4.md` 다. 왜 여섯인지, 왜 14px 이 바닥인지가
+ * 거기 있다. 한 줄로 줄이면: **한 크기가 여러 역할을 겸하고 있어서 화면이 난잡했다.**
+ * 실측 당시 제품 전체에 크기가 25종 1,479곳이었고, 그중 12px 하나가 본문이자
+ * 보조정보였다. 크기가 역할을 못 가리키면 사람은 어디부터 읽을지 못 정한다.
+ *
+ * **`@layer components` 인 것이 중요하다**(T-7). utilities 에 `@apply` 로 두면 생성된
+ * 유틸리티보다 **뒤에** 깔려서 `class="t-sub text-lg"` 에서 t-sub 가 이긴다. 이 저장소는
+ * 이미 그 함정에 한 번 빠져 있다(`.easy-card` 를 쓰면 테두리를 클래스로 못 바꾼다 — G-30).
+ * components 층이면 유틸리티가 정상적으로 덮어쓴다.
+ *
+ * **크기만 따로 덮어쓰지 않는다**(T-6) — 행간이 따라오지 않으면 한글이 뭉친다.
+ * 자리가 좁으면 글자를 줄이는 게 아니라 반복·잘못된 묶음·과한 패딩을 먼저 지운다(T-1).
+ */
+@layer components {
+  /* ── 입력창 공통 스타일 ─────────────────────────────────────────────────────
+     **`@layer utilities` 에 있던 것을 여기로 옮겼다**(2026-09-13). 역할 클래스(`t-*`)를
+     여기 둔 것과 **완전히 같은 이유**다.
+
+     utilities 에 `@apply` 로 두면 생성된 유틸리티보다 **뒤에** 나와서, 특이도가 같을 때
+     **나중 규칙이 이긴다.** 그래서 `class="input-base pl-9"` 를 써도 `px-3` 이 이겨
+     padding-left 가 12px 로 남았다 — 오류도 경고도 없이 **조용히**.
+     실측으로 잡았다(dist CSS: `.pl-9` @35649 < `.input-base` @56021 · 브라우저에서
+     `paddingLeft: 12px`). 눈에 보인 증상은 **돋보기 아이콘이 「내용 또는 담당자 검색」
+     글자를 15px 파고든 것**이었다(사용자 지적 2026-09-13).
+
+     같은 이유로 조용히 지고 있던 것이 더 있었다 — `pr-10`(지우기 단추 자리) 4곳,
+     `py-1`·`py-1.5`(낮은 입력칸) 5곳, `px-2` 1곳. 층을 고치면 **다 같이 살아난다.**
+
+     **`text-xs` 24곳은 클래스를 지웠다.** 그것들도 지고 있어서 지금 14px 로 그려지는데,
+     층을 고치면 12px 로 **줄어든다** — 창 안쪽 14px 바닥(7단계)을 도로 깨는 셈이다.
+     지금 화면에 보이는 것을 그대로 두려면 그 클래스를 빼는 것이 맞다. */
+  .input-base {
+    @apply bg-[#F8FAFF] border border-ds-v3-line rounded-btn px-3 py-2.5 text-sm
+           text-ds-v3-ink placeholder:text-ds-v3-ink-2
+           focus:outline-none focus:border-ds-v3-tts transition-colors w-full;
+  }
+
+  /* 화면당 최대 하나. **없어도 된다** — 인사말은 정보가 아니다(T-4). */
+  .t-page    { font-size: 28px; line-height: 36px; font-weight: 600; letter-spacing: -0.02em; }
+  /* 화면을 가르는 큰 덩어리 */
+  .t-section { font-size: 20px; line-height: 28px; font-weight: 600; letter-spacing: -0.01em; }
+  /* 카드·패널의 머리줄 */
+  .t-group   { font-size: 18px; line-height: 26px; font-weight: 600; letter-spacing: -0.01em; }
+  /* 읽는 글, 목록 줄의 이름 */
+  .t-body    { font-size: 16px; line-height: 24px; font-weight: 400; }
+  /* 누르는 것·입력 라벨·탭 — 크기는 본문과 같고 굵기로 갈린다.
+     **500 이 아니라 600 이다**(2026-09-13 수정). 처음엔 500 이었는데 그러면 제품 전체의
+     두께가 400·500·600 셋이 된다 — 폰트 두께는 **둘까지**가 규칙이다(T-10).
+     500 을 없앤다고 라벨이 본문에 묻히지는 않는다: 누르는 것에는 이미 테두리나 채움이
+     있어서 상자가 그것을 가리킨다. 굵기까지 따로 줄 필요가 없었다. */
+  .t-label   { font-size: 16px; line-height: 24px; font-weight: 600; }
+  /* 설명·단위·부연. **여기가 바닥이다**(T-3) — 제품 어디에도 14px 미만을 두지 않는다. */
+  .t-sub     { font-size: 14px; line-height: 22px; font-weight: 400; }
+}
+
+/* BGM 이퀄라이저 바 애니메이션 */
+@keyframes eq-bounce {
+  from { transform: scaleY(0.4); }
+  to   { transform: scaleY(1.0); }
+}
+
+/* 방송 오버레이 그라데이션 흐름 */
+@keyframes gradient-flow {
+  0%   { background-position: 0%   50% }
+  50%  { background-position: 100% 50% }
+  100% { background-position: 0%   50% }
+}
+.overlay-gradient-anim {
+  animation: gradient-flow 10s ease infinite;
+}
+
+/* 예약 방송 토스트 페이드인 */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(-8px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out;
+}
+
+/* ── 자리를 옮길 때 **한 박자 눕혀 준다** (사용자 지시 2026-09-15) ──────────────
+   *"지금 카드 내려놓으면 바로 휙 가닥 옆으로 가잖아, 그러니까 좀 어지러운 것 같아.
+     약간 부드럽게 이모션 줘볼까? UX 경험으로?"*
+
+   초안 카드가 열리면 배치가 **한 칸 → 두 칸**으로 바뀐다. 그 순간 「오늘 일과」가
+   가운데에서 왼쪽으로 **텔레포트**한다 — 눈이 그것을 따라가지 못해서 어지럽다.
+
+   **자리 이동 자체는 애니메이션을 못 건다** — flex 에서 grid 로 바뀌는 것이라
+   중간값이 없다. 그래서 「옮기는 중」을 그리는 대신 **새 자리에 내려앉는 모습**을
+   그린다. 살짝 위·옆에서 제자리로 들어오며 또렷해진다. 눈이 "여기 놓였구나"를
+   읽을 시간이 생긴다.
+
+   **`prefers-reduced-motion` 에서는 안 움직인다** — 어지러움을 줄이려고 넣은
+   것이 어지러움에 약한 사람에게 해가 되면 안 된다. */
+@keyframes cc-settle {
+  from { opacity: 0.35; transform: translate3d(0, 6px, 0) scale(0.985); }
+  to   { opacity: 1;    transform: translate3d(0, 0,   0) scale(1); }
+}
+.cc-settle {
+  animation: cc-settle 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .cc-settle { animation: none; }
+}
+
+/* ── 처음 안내(HomeTour) — 어둡게 덮고 한 곳만 뚫는다. 색은 새로 안 만든다(잉크 막 + 흰 테) ── */
+.cc-tour-hole {
+  position: fixed;
+  border-radius: 16px;
+  box-shadow: 0 0 0 3px #fff, 0 0 0 200vmax rgba(26, 29, 46, 0.62);
+  pointer-events: none;
+}
+/* 자리 이동은 JS 가 매 틀 조금씩 다가가며 한다(HomeTour 「부드럽게 따라간다」) — CSS 전환을 겹치면 늦게 끌린다.
+   장이 바뀌면 말풍선이 살며시 떠오른다. */
+.cc-tour-tip-in { animation: cc-tour-tip-in .55s cubic-bezier(.22, .61, .36, 1) both; }
+@keyframes cc-tour-tip-in { from { opacity: 0; transform: translateY(10px) scale(.98); } to { opacity: 1; transform: none; } }
+/* 가상 마우스 — 흰 테를 두른 잉크 화살표. 누를 때 살짝 눌리고 동그란 물결이 번진다. */
+.cc-tour-cursor {
+  position: fixed; top: 0; left: 0; z-index: 3; opacity: 0;
+  pointer-events: none; will-change: transform;
+  filter: drop-shadow(0 3px 6px rgba(26, 29, 46, .35));
+}
+.cc-tour-cursor svg { display: block; transform-origin: 4px 3px; }
+.cc-tour-cursor path { fill: #1A1D2E; stroke: #fff; stroke-width: 1.6; stroke-linejoin: round; }
+.cc-tour-cursor::after {
+  content: ''; position: absolute; left: -14px; top: -15px; width: 36px; height: 36px;
+  border-radius: 50%; border: 3px solid #2563EB; opacity: 0; pointer-events: none;
+}
+.cc-tour-cursor.cc-tour-click svg { animation: cc-tour-tap .38s ease; }
+.cc-tour-cursor.cc-tour-click::after { animation: cc-tour-ring .6s ease-out; }
+@keyframes cc-tour-tap { 40% { transform: scale(.8); } }
+@keyframes cc-tour-ring { from { opacity: .9; transform: scale(.3); } to { opacity: 0; transform: scale(1.5); } }
+/* 「눌리는 모습」 — 실제로는 안 눌린다(막이 클릭을 받는다) */
+.cc-tour-press {
+  transform: scale(.93) !important;
+  box-shadow: 0 0 0 6px rgba(31, 41, 55, .22) !important;
+  transition: transform .12s, box-shadow .12s;
+}
+.cc-tour-pop { animation: cc-tour-pop .42s cubic-bezier(.22, .61, .36, 1) both; }
+@keyframes cc-tour-pop { from { opacity: 0; transform: scale(.92); } to { opacity: 1; transform: none; } }
+.cc-tour-check circle { fill: #EAF3FC; stroke: #2563EB; stroke-width: 3; stroke-dasharray: 190; stroke-dashoffset: 190; animation: cc-tour-draw .5s .1s ease forwards; }
+.cc-tour-check path { fill: none; stroke: #2563EB; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 50; stroke-dashoffset: 50; animation: cc-tour-draw .35s .5s ease forwards; }
+@keyframes cc-tour-draw { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .cc-tour-hole, .cc-tour-tip, .cc-tour-press, .cc-tour-cursor { transition: none !important; }
+  .cc-tour-tip-in, .cc-tour-cursor.cc-tour-click svg, .cc-tour-cursor.cc-tour-click::after { animation: none; }
+  .cc-tour-pop { animation: none; }
+  .cc-tour-check circle, .cc-tour-check path { animation: none; stroke-dashoffset: 0; }
+}
+
+/* 초기 설정 끝 「잠시만 기다려 주세요」가 넓어진 판 위로 스며든다(SetupWizard). 움직임 줄이기면 쓰지 않는다(motion-safe). */
+@keyframes cc-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── 키보드로 다니는 사람에게 "지금 어디인지" 보여준다 (UX-42, 2026-09-11) ──────
+   `.input-base` 가 `focus:outline-none` 으로 브라우저 기본 링을 지우고 **테두리 색
+   1px 변화**로만 대체하고 있었다(이 파일 :115). 색 하나로만 알리는 표시는 저대비
+   화면·색약에서 안 보이고, 마우스를 못 쓰는 상황에서는 지금 어디에 있는지를 통째로 잃는다.
+   현장 PC 는 마우스가 있지만, 방송을 내보내는 순간에 손이 하나 비는 상황은 드물지 않다.
+
+   **버튼이 389개다**(2026-09-11 실측). 화면마다 붙이면 반드시 하나를 빠뜨리고,
+   빠뜨린 자리는 조용하다 — 그래서 규칙을 여기 한 곳에만 둔다.
+
+   `:focus-visible` 이라 마우스 클릭에는 안 뜬다. 키보드·보조기기에서만 뜬다 —
+   그래서 "클릭했더니 파란 테두리가 남는다"는 옛 불평이 안 생긴다.
+
+   **`!important` 가 필요하다.** Tailwind 의 `focus:outline-none` 은 `outline: none` 이
+   아니라 **투명한 테두리를 그린다**(`outline-color: transparent`). 그 유틸리티는
+   `.focus\:outline-none:focus` 라 클래스 선택자(0,2,0)이고 이 규칙(0,1,0)을 이긴다.
+   src 에 그 클래스가 **81곳**이라 이 규칙이 조용히 죽어 있었다 — 2026-09-11 브라우저에서
+   실측했다: 그 클래스를 떼자 링 색이 `rgba(0,0,0,0)` → `rgb(79,142,247)` 로 살아났다.
+   **소스만 보는 가드는 이것을 못 잡는다.** CSS 는 맞게 쓰여 있었고 화면에서만 안 보였다.
+
+   81곳을 고치는 대신 여기 한 줄을 세게 만든다 — 그 클래스들의 목적(마우스 클릭에 링이
+   안 남게)은 `:focus-visible` 이 이미 해 주므로, 이겨도 잃는 것이 없다. */
+:focus-visible {
+  outline: 2px solid theme('colors.cc.primary') !important;
+  outline-offset: 2px;
+}
+
+/* 클래스 선택자(`.input-base:focus`)가 위 규칙보다 우선하므로 한 번 더 적는다.
+   여기를 지우면 입력창만 조용히 포커스 표시를 잃는다. */
+.input-base:focus-visible {
+  outline: 2px solid theme('colors.cc.primary') !important;
+  outline-offset: 1px;
+}
+
+/* 라이트 테마 스크롤바 */
+::-webkit-scrollbar        { width: 5px; height: 5px; }
+::-webkit-scrollbar-track  { background: #F4F6FB; }
+::-webkit-scrollbar-thumb  { background: #D1D5DB; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #9CA3AF; }
+
+/* ── 인쇄 — 「라이선스 · 고지」 게시문 한 장만 (사용자 지시 2026-10-07) ─────────────────
+   붙일 종이에 메뉴·단추·머리줄이 찍히면 붙일 수 없다. `.print-only` 가 있는 화면을 인쇄하면
+   그것만 남기고 나머지는 숨긴다. `.no-print` 는 어느 화면에서든 인쇄에서 뺀다. */
+/* `visibility: hidden` 으로 숨기면 관리 화면이 **자리는 그대로 차지해** 빈 종이가 여러 장 더 나온다
+   (검수 1회차). 그래서 게시문으로 가는 길(조상)만 남겨 여백·배경·고정 위치를 걷고, 나머지는 아예 뺀다. */
+@media print {
+  .no-print { display: none !important; }
+  body:has(.print-only) *:not(:has(.print-only)):not(.print-only):not(.print-only *) { display: none !important; }
+  body:has(.print-only),
+  body:has(.print-only) *:has(.print-only) {
+    margin: 0 !important; padding: 0 !important; border: 0 !important; box-shadow: none !important;
+    background: none !important; position: static !important; transform: none !important;
+    min-height: 0 !important; height: auto !important; max-width: none !important; width: auto !important;
+    overflow: visible !important; filter: none !important; backdrop-filter: none !important;
+  }
+  body:has(.print-only) .print-only {
+    border: none !important; border-radius: 0 !important; padding: 18mm 16mm !important; background: #fff !important; color: #000 !important;
+  }
+  .notice-sheet h3 { font-size: 30pt !important; }
+  .notice-sheet p  { font-size: 20pt !important; line-height: 1.6 !important; }
+  @page { size: A4; margin: 0; }
+}

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CareCast AI — 요양원 스마트 방송 플랫폼</title>
+    <!-- PWA manifest & 홈화면 추가 아이콘 -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#FFFFFF" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="CareCast" />
+    <!-- Pretendard 폰트 (한국어) -->
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+    <!-- Inter 는 걷었다(2026-09-13, T-8). `font-inter` 사용처가 0곳이었고 유일한
+         실사용이던 `.nums` 의 숫자 전용 교체도 없앴다 — 한 줄 안에서 서체가 갈리면
+         "07:50 아침 방송" 의 숫자와 글자가 다른 폰트로 보인다. Pretendard 가 Inter
+         메트릭 기반이라 폭이 튀지 않는다. 서체는 하나다. -->
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CareCast 문서 허브</title>
+<style>
+  :root{ --bg:#EDF0F3; --surface:#fff; --ink:#141A22; --muted:#5B6774; --line:#D7DDE4; --accent:#0B6E5F }
+  @media (prefers-color-scheme:dark){
+    :root{ --bg:#0D1116; --surface:#141A21; --ink:#E7EDF3; --muted:#9BA8B6; --line:#242D38; --accent:#3FB79F }
+  }
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans KR",system-ui,"Malgun Gothic",sans-serif;line-height:1.7}
+  .wrap{max-width:820px;margin:0 auto;padding:48px 24px}
+  h1{font-size:28px;margin:0 0 6px;letter-spacing:-.02em}
+  p.sub{color:var(--muted);margin:0 0 28px}
+  ul{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+  a.card{display:block;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);
+         border-radius:10px;padding:14px 16px;text-decoration:none;color:inherit}
+  a.card:hover{border-color:var(--accent)}
+  a.card b{display:block;font-size:16px}
+  a.card span{color:var(--muted);font-size:14px}
+  code{font-family:"IBM Plex Mono",Consolas,monospace;font-size:.88em}
+  footer{margin-top:32px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>CareCast 문서 허브</h1>
+  <p class="sub">그림의 소스는 <code>docs/arch/*.json</code>이다. HTML은 산출물이니 직접 고치지 않는다.</p>
+  <ul>
+    <li><a class="card" href="ADOPT.md"><b>도입 가이드 — 다른 기관이 따라 하려면</b>
+      <span>필요한 것 · 설치 · <b>처음 설정할 것</b> · 켜기와 끄기 · <b>우리가 밟은 지뢰 10가지</b>. 개발자가 아닌 기관 담당자가 읽는 문서다.</span></a></li>
+    <li><a class="card" href="adopt-published.html"><b>도입 가이드 — 한 장 판</b>
+      <span>같은 내용을 읽기 좋은 한 장으로. 원본은 <code>docs/ADOPT.md</code>이니 고칠 때는 그쪽부터.</span></a></li>
+    <li><a class="card" href="arch/system-map.html"><b>시스템 지도 (합본)</b>
+      <span>그림 세 장(전체 설계도 · 예약하기 · 방송하기)과 배포 경로를 한 장에. <code>node scripts/build-system-map.cjs</code></span></a></li>
+    <li><a class="card" href="arch/structure.html"><b>전체 설계도</b>
+      <span>예약하기 · 방송하기 · 소리내기 · 지켜보기 네 묶음. 번호 1~8이 방송 하나가 나가는 순서다.</span></a></li>
+    <li><a class="card" href="arch/flow-reserve.html"><b>1. 예약하기</b>
+      <span>문장 한 줄이 예약이 되기까지. AI는 초안까지만 만들고 사람이 확정한다.</span></a></li>
+    <li><a class="card" href="arch/flow-broadcast.html"><b>2. 방송하기</b>
+      <span>그 시각에 무슨 일이 일어나는가. 소리가 두 갈래로 갈리는 곳과 누락을 잡는 자리.</span></a></li>
+    <li><a class="card" href="BACKUP.md"><b>백업 · 복구 절차</b>
+      <span>매일 04:30 자동 백업과 사람이 하는 복구 절차.</span></a></li>
+    <li><a class="card" href="DEVELOPER.md"><b>개발자 안내</b>
+      <span>개발 환경 세팅과 저장소 구조.</span></a></li>
+  </ul>
+  <footer>다시 그리려면 <code>/arch-view</code>. 배선 규칙(모듈이 부를 수 있는 방향)은 전체 설계도의 카드에 있다.
+  합본은 <code>node scripts/build-system-map.cjs</code> — 그림만 다룬다(진행 상황·코칭 브리프는 관리자 화면 &lsquo;고도화 제안&rsquo;이 원본).</footer>
+</div>
+</body>
+</html>

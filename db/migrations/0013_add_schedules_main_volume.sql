@@ -1,0 +1,13 @@
+-- schedules.main_volume — 이 예약의 '주 소리' 볼륨(0~100). NULL이면 시스템 기본값.
+--
+-- 예약 하나가 내는 소리는 대개 둘이다: 주 소리와 BGM 반주.
+-- 채널마다 컬럼을 만들지 않고 main_volume / bgm_volume 둘로 나눈 이유는, 한 예약이
+-- 동시에 여러 주 채널을 쓰는 경우가 없기 때문이다. 유형별 매핑은 domain/volume.js의
+-- mainChannelFor()가 갖는다.
+--   text -> 안내 음성 / chime -> 차임벨(현재 안내 음성과 같은 채널)
+--   audio -> 업로드 음원 / video, youtube-tv -> 영상
+--   bgm -> bgm_volume이 맡음 / flow -> 스텝 config가 맡음
+--
+-- bgm_volume(0012)과 같은 원칙: 전역 설정을 바꿨다 되돌리지 않고, 이 예약에만 실어 보낸다.
+-- 우선순위: 방송 이벤트에 실린 값 > 예약 행 > 시스템 기본값(settings).
+ALTER TABLE schedules ADD COLUMN main_volume INTEGER DEFAULT NULL;

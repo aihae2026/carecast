@@ -1,0 +1,70 @@
+CareCast
+Copyright 2026 jung-svg
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+이 제품은 Apache License 2.0 으로 공개됩니다(LICENSE 참조).
+
+-------------------------------------------------------------------------------
+Third-party components with separate terms / 따로 조건이 있는 함께 쓰는 것
+-------------------------------------------------------------------------------
+
+Supertonic 3 text-to-speech model weights
+  Copyright (c) 2026 Supertone Inc.
+  Licensed under the BigScience Open RAIL-M License — see
+  licenses/Supertonic-3-OpenRAIL-M.txt. The license imposes USE-BASED
+  RESTRICTIONS (Attachment A) that apply to every user and must be passed on
+  to anyone you redistribute the model to. Among them: do not distribute
+  generated audio without expressly and intelligibly disclosing that it is
+  machine-generated; do not impersonate others without consent; do not provide
+  medical advice. The model files are downloaded by `npm run setup:tts`
+  (or bundled in the release package) and are NOT covered by Apache-2.0.
+  The files used are the ONNX int8 conversion published by k2-fsa
+  (sherpa-onnx), a derivative of the original model; CareCast does not
+  modify them further.
+
+  Use of the Supertonic 3 model distributed with CareCast is permitted only
+  under the Open RAIL-M License, including the use-based restrictions in its
+  Attachment A, which are incorporated here as binding conditions. Anyone who
+  redistributes it must pass on these same restrictions.
+
+  "Supertonic" is a name of Supertone Inc. CareCast is not affiliated with or
+  endorsed by Supertone Inc., and the model is provided "AS IS" without
+  warranty.
+
+  안내 음성 모델(Supertonic 3) 가중치는 Apache-2.0 이 아니라 Open RAIL-M 을 따르며,
+  이용 제한(합성 음성임을 알릴 것 · 동의 없이 사칭하지 않을 것 · 의료 조언 금지 등)이 있습니다.
+  다시 나눠 줄 때는 licenses/ 의 전문을 함께 넘겨야 합니다. 요약은 LICENSES.md.
+  쓰는 파일은 원본을 k2-fsa(sherpa-onnx)가 ONNX int8 로 변환한 파생본이며, CareCast 는 더 고치지 않습니다.
+
+  CareCast 와 함께 배포되는 Supertonic 3 모델은 Open RAIL-M 과 그 Attachment A 의 이용 제한을
+  지키는 조건으로만 쓸 수 있으며, 이 제한은 이 배포의 이용 조건에 그대로 포함됩니다.
+  다시 나눠 주는 사람도 같은 제한을 그대로 넘겨야 합니다.
+
+  Supertonic 은 Supertone Inc. 의 이름이며, CareCast 는 Supertone 과 관계가 없고 보증받지 않았습니다.
+  모델은 「있는 그대로」 제공되며 보증이 없습니다.
+
+Weather data / 날씨 자료
+  Korea Meteorological Administration (기상청) — KOGL Type 1 / 공공누리 제1유형
+  Korea Environment Corporation AirKorea (한국환경공단 에어코리아) — KOGL Type 3 / 제3유형
+  Weather data by Open-Meteo.com (https://open-meteo.com/) — CC BY 4.0;
+    the free Open-Meteo API is for non-commercial use only.
+
+espeak-ng (GPL-3.0) and piper-phonemize (MIT) inside sherpa-onnx binaries
+  The sherpa-onnx platform packages (e.g. sherpa-onnx-c-api.dll in
+  sherpa-onnx-win-x64) statically include espeak-ng, licensed under the GNU
+  General Public License v3.0, and piper-phonemize (MIT). These binaries are
+  NOT part of this source repository; they are fetched by `npm install`.
+  The CareCast source code stays under Apache-2.0. If you distribute an
+  installer or package that contains these binaries, you must comply with
+  GPL-3.0 for that distribution (include the GPL-3.0 text — provided as
+  licenses/GPL-3.0.txt — and this notice, and offer the corresponding source
+  of espeak-ng / sherpa-onnx).
+
+  sherpa-onnx 실행 파일 안에는 espeak-ng(GPL-3.0)·piper-phonemize(MIT)가 들어 있습니다.
+  소스는 Apache-2.0 이지만, 이 실행 파일을 담은 설치판을 나눠 줄 때는 GPL-3.0 고지와
+  소스 제공 조건을 따라야 합니다. 자세한 것은 LICENSES.md 2-1절.
+
+Other bundled software (Node.js, Python, sherpa-onnx, ONNX Runtime, React and
+npm packages) is listed with its license in THIRD-PARTY-NOTICES.md and
+LICENSES.md.

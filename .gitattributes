@@ -1,0 +1,37 @@
+# 셸 스크립트는 Windows에서 clone해도 LF로 유지한다.
+# CRLF로 내려가면 bash가 캐리지리턴을 명령으로 읽고 죽는다 (.claude/skills/deploy-gate).
+*.sh text eol=lf
+
+# 하네스 파일은 체크아웃부터 LF 로 고정한다 (HC-008 ②, AP-0028).
+#
+# 왜: 보호 파일 무결성 검사가 sha1 을 뜨는데, PC 마다 core.autocrlf 가 달라 **내용이 한 글자도
+# 다르지 않은데 "변경"으로 뜬다.** 한쪽에서 --bless 하면 다른 쪽이 FAIL 이 되는 핑퐁이라
+# 기준선 파일이 커밋마다 뒤집혔다(2026-09-07 실측: 3대 PC 중 2대가 어긋남).
+#
+# ①(selftest 가 해시 전에 줄바꿈을 정규화, be48d9e)이 이미 그 핑퐁을 끊었으므로 **이것은 보조**다.
+# ①이 해시를 무해화한다면 여기는 **작업 트리의 바이트까지** 같게 만든다 — 사람이 두 PC 의 파일을
+# 직접 비교하거나 bash 도구를 붙일 때 같은 함정이 다시 나오지 않도록.
+#
+# 훅 스크립트는 bash 가 아니라 node 가 읽으므로 *.sh 처럼 실행이 깨지지는 않는다.
+#
+# **적용 뒤**: CRLF 로 받아 뒀던 PC 는 `git checkout -- .claude docs/audit` 로 다시 받아야
+# 작업 트리에 반영된다. 미커밋 변경이 없을 때만 할 것.
+.claude/**        text eol=lf
+docs/audit/*.json text eol=lf
+
+# 패치 파일은 바이트 그대로 둔다(HC-021, 2026-09-19). 위 대상 파일들이 LF 인데 패치가 CRLF 로
+# 내려가면 `git apply` 가 "patch does not apply" 로 전부 거절한다(실측).
+*.patch -text
+
+# ── 배포·제출 압축에서 빼는 것 (2026-09-16, `npm run package`) ──────────────
+#
+# `git archive` 가 이 표시를 보고 뺀다. 목록을 포장 스크립트에 적지 않고 여기 두는 이유:
+# **한 곳에만 있어야** 다음 사람이 「왜 빠졌지」를 여기서 찾는다.
+#
+# site-baseline.json — **운영 현장 값이다.** 남의 PC 에 심으면 환기방송 예약 6건과
+#   현장 좌표·인사말이 따라간다(docs/PACKAGING.md §2 「절대 가져가면 안 되는 것」).
+#   저장소에는 그대로 둔다 — 현장 PC 가 쓰는 파일이다.
+# docs/audit/sandbox/ — 검수하다 남은 임시 출력이다. 설치와 무관하다.
+server/config/site-baseline.json  export-ignore
+docs/audit/sandbox/               export-ignore
+*.bat text eol=crlf

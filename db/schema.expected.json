@@ -1,0 +1,406 @@
+{
+  "broadcasts": {
+    "columns": [
+      "id",
+      "time",
+      "type",
+      "content",
+      "user",
+      "target",
+      "success",
+      "date",
+      "prep_ms",
+      "run_key",
+      "content_source",
+      "scheduled_at",
+      "rendered_at",
+      "played_at",
+      "delay_ms",
+      "fail_reason"
+    ],
+    "notNull": []
+  },
+  "schedules": {
+    "columns": [
+      "id",
+      "title",
+      "content",
+      "target",
+      "scheduled_time",
+      "repeat_type",
+      "active",
+      "last_fired",
+      "broadcast_type",
+      "bgm_enabled",
+      "bgm_type",
+      "bgm_value",
+      "bgm_title",
+      "bgm_delay",
+      "bgm_end_delay",
+      "repeat_broadcast",
+      "group_id",
+      "repeat_start_date",
+      "repeat_end_date",
+      "repeat_weekdays",
+      "audio_file_id",
+      "flow_sequence_id",
+      "managed_by",
+      "bgm_volume",
+      "main_volume",
+      "playback_rate",
+      "content_source",
+      "urgency"
+    ],
+    "notNull": []
+  },
+  "favorites": {
+    "columns": [
+      "id",
+      "label",
+      "content",
+      "voice"
+    ],
+    "notNull": []
+  },
+  "settings": {
+    "columns": [
+      "key",
+      "value"
+    ],
+    "notNull": []
+  },
+  "users": {
+    "columns": [
+      "id",
+      "name",
+      "role",
+      "password_hash"
+    ],
+    "notNull": []
+  },
+  "audio_files": {
+    "columns": [
+      "id",
+      "category",
+      "filename",
+      "original_name",
+      "duration",
+      "uploaded_at",
+      "last_played",
+      "folder_id",
+      "source_name",
+      "source_url",
+      "license_note"
+    ],
+    "notNull": [
+      "category",
+      "filename",
+      "original_name"
+    ]
+  },
+  "audio_subtitles": {
+    "columns": [
+      "audio_file_id",
+      "cues",
+      "source",
+      "status",
+      "updated_at"
+    ],
+    "notNull": [
+      "cues",
+      "source",
+      "status",
+      "updated_at"
+    ]
+  },
+  "content_folders": {
+    "columns": [
+      "id",
+      "category",
+      "parent_id",
+      "name",
+      "created_at"
+    ],
+    "notNull": [
+      "category",
+      "name"
+    ]
+  },
+  "audio_playlist": {
+    "columns": [
+      "id",
+      "category",
+      "audio_file_id",
+      "sort_order",
+      "active"
+    ],
+    "notNull": [
+      "category",
+      "audio_file_id"
+    ]
+  },
+  "devlog_notes": {
+    "columns": [
+      "hash",
+      "note",
+      "hidden"
+    ],
+    "notNull": []
+  },
+  "category_notes": {
+    "columns": [
+      "category",
+      "note",
+      "updated_at"
+    ],
+    "notNull": []
+  },
+  "improvement_proposals": {
+    "columns": [
+      "id",
+      "date",
+      "title",
+      "description",
+      "status",
+      "category",
+      "created_at",
+      "updated_at",
+      "queued_at"
+    ],
+    "notNull": [
+      "date",
+      "title",
+      "status",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "checkin_runs": {
+    "columns": [
+      "id",
+      "item_name",
+      "result",
+      "note",
+      "checked_at"
+    ],
+    "notNull": [
+      "item_name",
+      "result",
+      "checked_at"
+    ]
+  },
+  "checklist_weeks": {
+    "columns": [
+      "id",
+      "week_label",
+      "started_at",
+      "is_current"
+    ],
+    "notNull": [
+      "week_label",
+      "started_at"
+    ]
+  },
+  "checklist_entries": {
+    "columns": [
+      "id",
+      "week_id",
+      "kind",
+      "item_key",
+      "value",
+      "note",
+      "updated_at"
+    ],
+    "notNull": [
+      "week_id",
+      "kind",
+      "item_key",
+      "value",
+      "updated_at"
+    ]
+  },
+  "coach_questions": {
+    "columns": [
+      "id",
+      "question",
+      "context",
+      "sort_order",
+      "created_at"
+    ],
+    "notNull": [
+      "question",
+      "created_at"
+    ]
+  },
+  "similar_cases": {
+    "columns": [
+      "id",
+      "title",
+      "description",
+      "source_label",
+      "source_url",
+      "sort_order"
+    ],
+    "notNull": [
+      "title",
+      "description"
+    ]
+  },
+  "brief_references": {
+    "columns": [
+      "id",
+      "label",
+      "detail",
+      "url",
+      "sort_order"
+    ],
+    "notNull": [
+      "label"
+    ]
+  },
+  "flow_sequences": {
+    "columns": [
+      "id",
+      "name",
+      "created_at",
+      "updated_at"
+    ],
+    "notNull": [
+      "name",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "flow_sequence_steps": {
+    "columns": [
+      "id",
+      "flow_sequence_id",
+      "sort_order",
+      "step_type",
+      "label",
+      "config"
+    ],
+    "notNull": [
+      "flow_sequence_id",
+      "sort_order",
+      "step_type",
+      "config"
+    ]
+  },
+  "schedule_drafts": {
+    "columns": [
+      "id",
+      "raw_input",
+      "title",
+      "content",
+      "scheduled_time",
+      "repeat_start_date",
+      "main_volume",
+      "bgm_volume",
+      "broadcast_type",
+      "status",
+      "created_at",
+      "resolved_at",
+      "source",
+      "failure_reason",
+      "schedule_id",
+      "approved_json",
+      "edited_fields"
+    ],
+    "notNull": [
+      "raw_input",
+      "title",
+      "scheduled_time",
+      "repeat_start_date",
+      "status",
+      "created_at"
+    ]
+  },
+  "checklist_items": {
+    "columns": [
+      "id",
+      "week_id",
+      "item_key",
+      "label",
+      "sort_order"
+    ],
+    "notNull": [
+      "week_id",
+      "item_key",
+      "label",
+      "sort_order"
+    ]
+  },
+  "settings_history": {
+    "columns": [
+      "id",
+      "key",
+      "old_value",
+      "new_value",
+      "changed_by",
+      "changed_at"
+    ],
+    "notNull": [
+      "key",
+      "changed_by",
+      "changed_at"
+    ]
+  },
+  "broadcast_steps": {
+    "columns": [
+      "id",
+      "run_key",
+      "title",
+      "step_no",
+      "label",
+      "result",
+      "ms",
+      "detail",
+      "started_at"
+    ],
+    "notNull": [
+      "run_key",
+      "title",
+      "step_no",
+      "label",
+      "result",
+      "started_at"
+    ]
+  },
+  "audio_cache": {
+    "columns": [
+      "cache_key",
+      "schedule_id",
+      "content_source",
+      "text_hash",
+      "voice",
+      "rate",
+      "pitch",
+      "salt",
+      "file_path",
+      "bytes",
+      "rendered_at",
+      "expires_at"
+    ],
+    "notNull": [
+      "content_source",
+      "salt",
+      "file_path",
+      "rendered_at"
+    ]
+  },
+  "server_boot": {
+    "columns": [
+      "id",
+      "started_at",
+      "last_seen_at",
+      "stopped_at",
+      "git_branch",
+      "pid"
+    ],
+    "notNull": [
+      "started_at",
+      "last_seen_at"
+    ]
+  }
+}
